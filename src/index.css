@@ -5,9 +5,55 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(3, 3, 3);
+  color: rgb(215, 218, 220);
+  caret-color: rgb(215, 218, 220);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.search-bar {
+  background-color: rgb(26, 26, 27);
+  display: flex;
+  justify-content: space-around;
+  height: 3rem;
+  align-items: center;
+  border-bottom: 1px solid rgb(52, 53, 54);
+}
+
+.search-bar form {
+  width: 50%;
+
+}
+
+.search-bar input {
+  background-color: rgb(39, 39, 41);
+  color: rgb(215, 218, 220);
+  border: 1px solid rgb(52, 53, 54);
+  border-radius: 5px;
+  height: 1.75rem;
+  width: 100%;
+}
+
+.search-bar input:hover {
+  background-color: rgb(26, 26, 27);
+  border: 1px solid rgb(215, 218, 220);
+}
+
+.search-bar input:focus {
+  background-color: rgb(26, 26, 27);
+}
+
+
+
+.search-bar .logo {
+  width: 150px;
+  height: 40px;
+  background-image: url(../public/images/kindareddit_logo_dark_theme.svg);
+  background-size: cover;
+  background-position: center;
+}
+
