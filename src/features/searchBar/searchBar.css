@@ -1,0 +1,60 @@
+.search-bar {
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: space-around;
+    height: 3rem;
+    align-items: center;
+    border-bottom: 1px solid var(--color-line);
+  }
+   
+  .search-bar .logo {
+    width: 150px;
+    height: 40px;
+    background-image: url(../../../public/images/kindareddit-logo-theme-dark.svg);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .search-bar form {
+    width: 50%;
+  }
+  
+  .search-bar input {
+    background-color: var(--color-input-field);
+    color: var(--color-text);
+    border: 1px solid var(--color-line);
+    border-radius: 5px;
+    height: 1.75rem;
+    width: 100%;
+  }
+  
+  .search-bar input:hover {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-search-border);
+  }
+  
+  .search-bar input:focus {
+    background-color: var(--color-background);
+    outline: 0px;
+    border: 1px solid var(--color-search-border);
+  }
+  
+  .search-bar button {
+    background-color: rgb(255, 69, 0);
+    border: 5px solid rgb(255, 69, 0);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .search-bar button:hover {
+    cursor: pointer;
+    background-color: rgb(242, 64, 0);
+    border: 5px solid rgb(242, 64, 0);
+  }
+  
+  .search-bar button:active {
+    background-color: rgb(197, 53, 1);
+    border: 5px solid rgb(197, 53, 1);
+  }
+  
+  
