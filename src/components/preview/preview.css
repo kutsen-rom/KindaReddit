@@ -5,6 +5,17 @@
     border-radius: 3px;
     border: 1px solid var(--color-post-border);
     padding: 0% 2%;
+    overflow: hidden;
+}
+
+.preview p {
+    padding-top: 1%;
+    font-size: 0.75rem;
+}
+
+.preview .content p {
+    font-size: 1rem;
+    margin-top: 0;
 }
 
 

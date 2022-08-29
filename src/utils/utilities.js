@@ -1,18 +1,18 @@
 export const calculateTime = (dateCreated, dateCurrent) => {
-  const difference = ((dateCreated - dateCurrent) / 1000 / 60).toFixed();
-  const seconds = (difference * 60).toFixed();
-  const minutes = difference;
-  const hours = (difference / 60).toFixed();
-  const days = (hours / 24).toFixed();
-  const weeks = (days / 7).toFixed();
-  const months = (weeks / 4).toFixed();
-  const years = (months / 12).toFixed();
-
+  const difference = Math.round(((dateCreated - dateCurrent) / 1000 / 60));
+  const seconds = Math.round(difference * 60);
+  const minutes = Math.round(difference);
+  const hours = Math.round(difference / 60);
+  const days = Math.round(hours / 24);
+  const weeks = Math.round(days / 7);
+  const months = Math.round(weeks / 4);
+  const years = Math.round(months / 12);
+  
     if (seconds === 1) {
       return `${seconds} second ago`
     }  else if (seconds < 60) {
     return `${seconds} seconds ago`
-    } else if (minutes === 1) {
+    } else if (minutes === 1 ) {
       return `${minutes} minute ago`
      } else if ( minutes > 1 && minutes < 60) {
     return `${minutes} minutes ago`
@@ -37,4 +37,5 @@ export const calculateTime = (dateCreated, dateCurrent) => {
    } else if (years > 1){
     return `${years} years ago`
    }
+
    }

@@ -1,21 +1,27 @@
-
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTheme, toggleTheme } from "../theme/themeSlice";
+import { loadPosts } from "../posts/postsSlice";
 import './searchBar.css'
 
 export const SearchBar = () => {
-  
-  const [ term, setTerm ] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [ search, setSearch ] = useState('');
 
   useEffect(() => {
-    setTerm(localStorage.getItem('term'))
+    setSearch(localStorage.getItem('search'))
   }, [])
 
   const handleChange = ({ target }) => {
-    setTerm(target.value);
-    localStorage.setItem('term', target.value);
+    setSearch(target.value);
+    localStorage.setItem('search', target.value);
+    const search = target.value;
+    if (search) {
+      setSearchParams({ search: search })
+    } else {
+      setSearchParams({});
+    }
   }
 
   const dispatch = useDispatch();
@@ -41,14 +47,17 @@ export const SearchBar = () => {
     }
   }
 
- 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loadPosts({category: '', when: '', search}))
+  }
 
 	return(
     <>
       <div className="search-bar">
         <Link to='/'><div className='logo' id='logo'></div></Link>
-        <form >
-          <input name="term" value={term} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
+        <form onSubmit={handleSubmit}>
+          <input name="term" value={searchParams.get('search') || ''} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
         </form>
         <button onClick={handleClick}>Change theme</button>
       </div>
