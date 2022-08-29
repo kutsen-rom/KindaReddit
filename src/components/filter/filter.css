@@ -1,0 +1,47 @@
+.filter {
+    margin: 10px 0 15px 0;
+    width: 40%;
+    height: 60px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-post-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.filter a {
+    width: 100px;
+    height: 60%;
+    background-color: var(--color-action-button);
+    color: var(--color-text);
+    border: 1px transparent;
+    border-radius: 20px;
+    font-style: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.filter a:hover {
+    cursor: pointer;
+    background-color: var(--color-action-button-hover);
+}
+
+.filter a:active {
+    background-color: var(--color-action-button-active);
+}
+
+.filter .active {
+    background-color: rgb(255, 69, 0);
+    color: white;
+}
+
+.filter .active:hover {
+    background-color: rgb(242, 64, 0);
+}
+
+.filter .active:active {
+    background-color: rgb(197, 53, 1);
+}

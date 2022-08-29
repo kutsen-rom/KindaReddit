@@ -4,8 +4,14 @@
   --color-text: rgb(215, 218, 220);
   --color-line: rgb(52, 53, 54);
   --color-input-field: rgb(39, 39, 41);
-  --color-border-post: rgb(52, 53, 54);
+  --color-post-border: rgb(52, 53, 54);
   --color-search-border: rgb(215, 218, 220);
+  --color-action-button: rgb(54, 54, 56);
+  --color-action-button-hover: rgb(70, 70, 72);
+  --color-action-button-active: rgb(90, 90, 93);
+  --color-orange-button: rgb(255, 69, 0);
+  --color-orange-button-hover:rgb(242, 64, 0);
+  --color-orange-button-active:rgb(197, 53, 1);
 }
 
 html[data-theme='light'] {
@@ -13,9 +19,13 @@ html[data-theme='light'] {
   --color-background: rgb(255, 255, 255);
   --color-text: rgb(34, 34, 34);
   --color-line: rgb(237, 239, 241);
-  --color-input-field: rgb(246, 247, 248);;
-  --color-border-post: rgb(204, 204, 204);
+  --color-input-field: rgb(246, 247, 248);
+  --color-post-border: rgb(204, 204, 204);
   --color-search-border: rgb(0, 121, 211);
+  --color-action-button: rgb(243, 244, 245);
+  --color-action-button-hover: rgb(221, 222, 223);
+  --color-action-button-active: rgb(197, 198, 199);
+ 
 }
 
 body {

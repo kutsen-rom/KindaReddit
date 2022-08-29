@@ -1,5 +1,3 @@
-//! author, created_utc, title, id, num_comments, permalink, score, subreddit_name_prefixed, url, 
-//* preview.images.0.source.url
 
 import { Link, Outlet } from "react-router-dom"
 import { useEffect, useState } from "react";
@@ -18,7 +16,6 @@ export const SearchBar = () => {
   const handleChange = ({ target }) => {
     setTerm(target.value);
     localStorage.setItem('term', target.value);
-    console.log(localStorage.getItem('term'))
   }
 
   const dispatch = useDispatch();
@@ -44,15 +41,19 @@ export const SearchBar = () => {
     }
   }
 
+ 
+
 	return(
-		<div className="search-bar">
-			<Link to='/'><div className='logo' id='logo'></div></Link>
-			<form >
-				<input name="term" value={term} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
-			</form>
-      <button onClick={handleClick}>Change theme</button>
+    <>
+      <div className="search-bar">
+        <Link to='/'><div className='logo' id='logo'></div></Link>
+        <form >
+          <input name="term" value={term} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
+        </form>
+        <button onClick={handleClick}>Change theme</button>
+      </div>
       <Outlet />
-		</div>
+    </>
 	)
 
 
