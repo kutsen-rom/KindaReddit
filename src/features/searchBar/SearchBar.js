@@ -18,7 +18,6 @@ export const SearchBar = () => {
   const category = params.category ? params.category : '';
   const when = params.when;
   const subreddit = params.subreddit;
-  console.log(subreddit)
 
   useEffect(() => {
     if (searchParams.get('search')) {

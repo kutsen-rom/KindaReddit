@@ -9,7 +9,6 @@ import { Preview } from "../../components/preview/Preview";
 export const Posts = () => {
   const posts = useSelector(selectPosts);
   const isLoading = useSelector(selectIsLoading);
-  console.log(posts);
   
 
 

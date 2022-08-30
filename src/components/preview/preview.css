@@ -8,6 +8,10 @@
     overflow: hidden;
 }
 
+.preview h3 {
+    margin: 0;
+}
+
 .preview p {
     padding-top: 1%;
     font-size: 0.75rem;
@@ -22,6 +26,7 @@
     width: auto;
     margin-top: 15px;
     word-break: break-all;
+    color: var(--color-text)
 }
 
 .preview .first-row-container {

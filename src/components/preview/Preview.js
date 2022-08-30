@@ -17,7 +17,6 @@ export const Preview = ({ preview }) => {
   }
   showMetaData();
  
-
     return (
         <div className="preview">
             <div className='first-row-container'>
@@ -25,6 +24,7 @@ export const Preview = ({ preview }) => {
                     <p>&nbsp;• Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
             </div>
             <h3>{title}</h3>
+            <a href={preview.url}>{!preview.is_reddit_media_domain && !preview.domain.includes('self.') && !preview.domain.includes('reddit') && !preview.domain.includes('imgur')  ? preview.url : ''}</a>
             {preview.post_hint === 'image' && 
             <a href={preview.url}><img width='100%' src={preview.url}></img></a>
         }
@@ -32,21 +32,10 @@ export const Preview = ({ preview }) => {
                 return <a href={image}><img width='100%' src={image}></img></a> 
             })}
             {preview.is_video && 
-            <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls ></video>    }
+            <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls ></video>}
             {preview.selftext && 
             <p dangerouslySetInnerHTML={{__html: content}} className='content'></p>}
-            <h6>{preview.num_comments} {preview.num_comments === 1 ? 'Comment' : 'Comments'}</h6>
+            <h6>{preview.score} {preview.score === 1 ? 'point' : 'points'} • {preview.num_comments} {preview.num_comments === 1 ? 'comment' : 'comments'}</h6>
         </div>
     )
 }
-
-// author: post.data.author,
-// subreddit_name_prefixed: post.data.subreddit_name_prefixed,
-// title: post.data.title,
-// id: post.data.id,
-// post_hint: post.data.post_hint,
-// created_utc: post.data.created_utc,
-// num_comments: post.data.num_comments,
-// permalink: post.data.permalink,
-// score: post.data.score,
-// url: post.data.url
