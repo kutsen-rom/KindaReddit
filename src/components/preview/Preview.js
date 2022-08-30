@@ -12,7 +12,7 @@ export const Preview = ({ preview }) => {
 
     return (
         <div className="preview">
-            <p><b>{preview.subreddit_name_prefixed}</b> • Posted by u/{preview.author} {calculateTime(dateCreated, dateCurrent)}</p>
+            <p><b>{preview.subreddit_name_prefixed}</b> • Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
             <h3>{title}</h3>
             {preview.post_hint === 'image' && 
             <a href={preview.url}><img width='100%' src={preview.url}></img></a>

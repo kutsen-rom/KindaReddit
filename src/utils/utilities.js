@@ -64,11 +64,13 @@ export const calculateTime = (dateCreated, dateCurrent) => {
   export const mapComments = (json) => {
     console.log(json.data.children[0])
     return json.data.children.map(comment => ({
-      id: comment.data.id,
-      author: comment.data.author,
-      created_utc: comment.data.created_utc,
-      score: comment.data.score,
-      body_html: comment.data.body_html,
-      replies: comment.data.replies
+      data: {
+        id: comment.data.id,
+        author: comment.data.author,
+        created_utc: comment.data.created_utc,
+        score: comment.data.score,
+        body_html: comment.data.body_html,
+        replies: comment.data.replies
+      }
     }))
   }

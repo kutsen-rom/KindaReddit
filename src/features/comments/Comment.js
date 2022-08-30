@@ -5,18 +5,33 @@ import { decode } from 'html-entities'
 
 
 export const Comment = ({ comment }) => {
-  if (comment.replies) {
-    console.log(comment.replies.data.children.length)
-  }
-  const dateCreated = new Date().getTime();
-  const dateCurrent = new Date(comment.created_utc * 1000)
-  const content = decode(comment.body_html);
+  const nestedComments = (comment.data.replies ? comment.data.replies.data.children : []).map(comment => {
+    console.log(comment)
+    return <Comment key={comment.data.id} comment={comment} type="child" />
+  })
 
-  return (
-    <div className="comment">
-      <p className='first-line'><b>u/{comment.author}</b> • posted {calculateTime(dateCreated, dateCurrent)}</p>
-      <p dangerouslySetInnerHTML={{__html: content}}></p>
-      <p className='points'><b>{comment.score} points • {comment.replies && comment.replies.data.children.length} replies</b></p>
-    </div>
+  const dateCreated = new Date().getTime();
+  const dateCurrent = new Date(comment.data.created_utc * 1000)
+  const content = decode(comment.data.body_html);
+
+  return (<>
+  {comment.data.author &&
+  <div className='comment-container'>
+    <div style={{'marginLeft':1 * comment.data.depth}}  className="comment">
+      <div className='box'>
+        <div>
+        </div>
+        <div>
+          <p className='first-line'><b>u/{comment.data.author}</b> • posted {calculateTime(dateCreated, dateCurrent)}</p>
+          <p dangerouslySetInnerHTML={{__html: content}}></p>
+          <p className='points'><b>{comment.data.score} points • {comment.data.replies && comment.data.replies.data.children.length} replies</b></p>
+        </div>
+      </div>
+  {nestedComments}
+  </div>
+</div>
+    }
+    
+    </>
   )
 }

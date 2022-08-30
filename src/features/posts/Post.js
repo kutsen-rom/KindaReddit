@@ -27,16 +27,17 @@ export const Post = () => {
 
     return (
     <div className="post-container">
-       <div className='post'> 
-       <Preview  preview={post}/>
-        </div>
+      <div className='post'> 
+        <Preview  preview={post}/>
+      </div>
         <h2>{post.num_comments} Comments</h2>
-        {areLoading ? 
-        <h2>Loading comments...</h2> :
-        comments.map(comment => {
-          return <Comment comment={comment} />
-        })}
-      
+        <div className='comments-container'>
+          {areLoading ? 
+          <h2>Loading comments...</h2> :
+          comments.map(comment => {
+            return <Comment key={comment.id} comment={comment} />
+          })}
+        </div>
 
     </div>
     )
