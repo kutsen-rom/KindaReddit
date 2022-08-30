@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { mapPosts } from "../../utils/utilities";
-//! post_hint ,author, created_utc, title, id, num_comments, permalink, score, subreddit_name_prefixed, url, 
-//* preview.images.0.source.url
-// preview: post.data.preview.images[0].resolutions[2],
 
 export const loadPosts = createAsyncThunk(
   'posts/loadPosts',
@@ -30,7 +27,6 @@ export const loadPosts = createAsyncThunk(
       }
   }
 )
-//https://www.reddit.com/r/popular/top.json?t=week
 export const postsSlice = createSlice({
     name: 'posts',
     initialState: {

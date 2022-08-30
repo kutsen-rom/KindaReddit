@@ -23,6 +23,7 @@ export const Post = () => {
 
     useEffect(() => {
       try {
+    window.scrollTo(0, 0)
         dispatch(loadComments(post.permalink));
       } catch (err) {
       }
