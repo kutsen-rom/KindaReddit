@@ -14,7 +14,7 @@ function App() {
           <Route path=':when' element={<Posts />} />
         </Route>
         <Route path='comments/post/:postId' element={<Post />} />
-        
+        <Route path='subreddit/r/:subreddit' element={<Posts />}/>
       </Route>
       <Route path='*' element={<ErrorPage />} />
     </Routes>

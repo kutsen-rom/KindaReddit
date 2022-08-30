@@ -15,21 +15,23 @@ export const SearchBar = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-
   const category = params.category ? params.category : '';
   const when = params.when;
+  const subreddit = params.subreddit;
+  console.log(subreddit)
 
   useEffect(() => {
     if (searchParams.get('search')) {
       dispatch(loadPosts({category: '', when: '', search}))
-    } else if (!params.postId) {
+    } else if (!params.postId && !subreddit) {
       dispatch(loadPosts({category, when}));
+    } else if (subreddit) {
+      dispatch(loadPosts({category: '', when: '', search: '', subreddit}));
     }
   }, [dispatch, category, when])
 
   useEffect(() => {
     setSearch(localStorage.getItem('search'))
-    
   }, [])
 
   const handleChange = ({ target }) => {

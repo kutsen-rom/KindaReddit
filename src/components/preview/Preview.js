@@ -1,6 +1,7 @@
 import './preview.css'
 import { calculateTime } from '../../utils/utilities';
 import { decode } from 'html-entities'
+import { Link } from 'react-router-dom'
 
 export const Preview = ({ preview }) => {
   const dateCreated = new Date(preview.created_utc * 1000);
@@ -12,16 +13,17 @@ export const Preview = ({ preview }) => {
   const showMetaData = () => {
     for (let key in preview.media_metadata) {
         gallery.push(decode(preview.media_metadata[key].s.u))
-        console.log(key)
     }
   }
   showMetaData();
-  console.log(gallery);
  
 
     return (
         <div className="preview">
-            <p><b>{preview.subreddit_name_prefixed}</b> • Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
+            <div className='first-row-container'>
+                    <Link to={`/subreddit/${preview.subreddit_name_prefixed}`}><b>{preview.subreddit_name_prefixed}</b></Link>
+                    <p>&nbsp;• Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
+            </div>
             <h3>{title}</h3>
             {preview.post_hint === 'image' && 
             <a href={preview.url}><img width='100%' src={preview.url}></img></a>
