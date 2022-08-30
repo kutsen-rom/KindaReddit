@@ -1,0 +1,19 @@
+.post-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-container .preview {
+    width: 90%;
+}
+
+.post {
+    width: 40%;
+}
+
+.post h2{
+    text-align: left;
+}
+

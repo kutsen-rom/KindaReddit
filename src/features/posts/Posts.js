@@ -1,9 +1,10 @@
+import './posts.css'
+
 import { useSelector, useDispatch } from "react-redux";
 import { selectPosts, selectIsLoading, loadPosts } from "../posts/postsSlice";
 import { Filter } from "../../components/filter/Filter";
-import './posts.css'
 import { useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Preview } from "../../components/preview/Preview";
 
 export const Posts = () => {
@@ -25,7 +26,7 @@ export const Posts = () => {
         <div className="posts">
           <Filter />
           {posts.map(post => {
-            return <Preview key={post.id} preview={post}/>
+            return <Link to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
           })}
         </div>
         }

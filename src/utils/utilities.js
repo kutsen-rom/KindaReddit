@@ -39,3 +39,36 @@ export const calculateTime = (dateCreated, dateCurrent) => {
    }
 
    }
+
+   export const mapPosts = (json) => {
+    console.log(json.data.children);
+    return json.data.children.map(post => ({
+      author: post.data.author,
+      subreddit_name_prefixed: post.data.subreddit_name_prefixed,
+      title: post.data.title,
+      id: post.data.id,
+      created_utc: post.data.created_utc,
+      num_comments: post.data.num_comments,
+      permalink: post.data.permalink,
+      score: post.data.score,
+      url: post.data.url,
+      post_hint: post.data.post_hint,
+      thumbnail: post.data.thumbnail,
+      is_video: post.data.is_video,
+      selftext: post.data.selftext_html,
+      preview: post.data.preview,
+      ...(post.data.media) && {video: post.data.media.reddit_video}
+  }));
+  }
+
+  export const mapComments = (json) => {
+    console.log(json.data.children[0])
+    return json.data.children.map(comment => ({
+      id: comment.data.id,
+      author: comment.data.author,
+      created_utc: comment.data.created_utc,
+      score: comment.data.score,
+      body_html: comment.data.body_html,
+      replies: comment.data.replies
+    }))
+  }

@@ -1,30 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { mapPosts } from "../../utils/utilities";
 //! post_hint ,author, created_utc, title, id, num_comments, permalink, score, subreddit_name_prefixed, url, 
 //* preview.images.0.source.url
 // preview: post.data.preview.images[0].resolutions[2],
-
-const mapPosts = (json) => {
-  console.log(json.data.children);
-  return json.data.children.map(post => ({
-    author: post.data.author,
-    subreddit_name_prefixed: post.data.subreddit_name_prefixed,
-    title: post.data.title,
-    id: post.data.id,
-    created_utc: post.data.created_utc,
-    num_comments: post.data.num_comments,
-    permalink: post.data.permalink,
-    score: post.data.score,
-    url: post.data.url,
-    post_hint: post.data.post_hint,
-    thumbnail: post.data.thumbnail,
-    is_video: post.data.is_video,
-    selftext: post.data.selftext_html,
-    preview: post.data.preview,
-    ...(post.data.media) && {video: post.data.media.reddit_video}
-
-    
-}));
-}
 
 export const loadPosts = createAsyncThunk(
   'posts/loadPosts',
@@ -45,18 +23,16 @@ export const loadPosts = createAsyncThunk(
   }
 )
 //https://www.reddit.com/r/popular/top.json?t=week
-
 export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
         posts: [],
         isLoading: false,
         hasError: false,
-        category: ''
     },
     reducers: {
-      setCategory: (state, action) => {
-        state.category = action.payload;
+      addPost: (state, action) => {
+        state.post = action.payload;
       }
     },
     extraReducers: (builder) => {
@@ -77,8 +53,9 @@ export const postsSlice = createSlice({
     }
 })
 
+export const selectPost = state => state.posts.post;
 export const selectPosts = state => state.posts.posts;
 export const selectIsLoading = state => state.posts.isLoading;
-export const { setCategory } = postsSlice.actions;
+export const { addPost } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -3,3 +3,11 @@
     flex-direction: column;
     align-items: center;
 }
+
+.posts a {
+    color: var(--color-text);
+    text-decoration: none;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
