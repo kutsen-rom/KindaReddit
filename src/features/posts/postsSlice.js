@@ -8,16 +8,19 @@ export const loadPosts = createAsyncThunk(
   'posts/loadPosts',
   async ({category, when, search}) => {
       if (when) {
-        const response = await fetch(`https://www.reddit.com/r/popular/${category}.json?t=${when}&limit=100`);
+        const response = await fetch(`https://www.reddit.com/r/popular/${category}.json?t=${when}&limit=3`);
         const json = await response.json();
+        localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
         return mapPosts(json);
       } else if (search) {
           const response = await fetch(`https://www.reddit.com/search/.json?q=${search}`);
           const json = await response.json();
+          localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
           return mapPosts(json);
       } else {
-          const response = await fetch(`https://www.reddit.com/r/popular/${category}.json?limit=100`);
+          const response = await fetch(`https://www.reddit.com/r/popular/${category}.json?limit=3`);
           const json = await response.json();
+          localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
           return mapPosts(json);
       }
   }
@@ -26,9 +29,9 @@ export const loadPosts = createAsyncThunk(
 export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
-        posts: [],
+        posts: JSON.parse(localStorage.getItem('posts')),
         isLoading: false,
-        hasError: false,
+        postsError: false,
     },
     reducers: {
       addPost: (state, action) => {
@@ -39,16 +42,16 @@ export const postsSlice = createSlice({
         builder
             .addCase(loadPosts.pending, (state) => {
                 state.isLoading = true;
-                state.hasError = false;
+                state.postsError = false;
             })
             .addCase(loadPosts.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.hasError = false;
+                state.postsError = false;
                 state.posts = action.payload;
             })
             .addCase(loadPosts.rejected, (state) => {
                 state.isLoading = false;
-                state.hasError = true;
+                state.postsError = true;
             })
     }
 })
@@ -56,6 +59,7 @@ export const postsSlice = createSlice({
 export const selectPost = state => state.posts.post;
 export const selectPosts = state => state.posts.posts;
 export const selectIsLoading = state => state.posts.isLoading;
+export const selectPostsError = state => state.posts.postsError;
 export const { addPost } = postsSlice.actions;
 
 export default postsSlice.reducer;

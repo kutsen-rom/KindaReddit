@@ -2,6 +2,7 @@
     width: 100%;
     background-color: var(--color-post-border);
 }
+
 .comment {
     width: 96%;
     background-color: var(--color-background);
@@ -22,6 +23,7 @@
 
 .comment p {
     font-size: 0.8rem;
+    
 }
 
 .comment .points{
@@ -29,5 +31,6 @@
 }
 
 .comment a {
-    color: var(--color-text)
+    color: var(--color-text);
+    word-break: break-all;
 }

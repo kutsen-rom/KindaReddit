@@ -1,0 +1,50 @@
+.loading-comments-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loading-comments {
+    margin-top: 30px;
+    width: 100%;
+    height: 150px;
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid var(--color-post-border);
+    border-radius: 3px;
+}
+
+.row-comments {
+    background-color: var(--color-canvas);
+    width: 90%;
+}
+
+.title-comments {
+    height: 2rem;
+}
+
+.content-comments {
+    height: 1rem;
+}
+
+.footer-comments {
+    margin-bottom: 10px;
+    height: 0.5rem;
+}
+
+.header-comments {
+    margin-top: 10px;
+    height: 0.5rem;
+}
+
+.content-box-comments {
+    height:55px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}

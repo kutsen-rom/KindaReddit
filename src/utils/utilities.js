@@ -41,7 +41,6 @@ export const calculateTime = (dateCreated, dateCurrent) => {
    }
 
    export const mapPosts = (json) => {
-    console.log(json.data.children);
     return json.data.children.map(post => ({
       author: post.data.author,
       subreddit_name_prefixed: post.data.subreddit_name_prefixed,
@@ -62,7 +61,6 @@ export const calculateTime = (dateCreated, dateCurrent) => {
   }
 
   export const mapComments = (json) => {
-    console.log(json.data.children[0])
     return json.data.children.map(comment => ({
       data: {
         id: comment.data.id,

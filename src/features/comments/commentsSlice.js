@@ -5,7 +5,6 @@ export const loadComments = createAsyncThunk(
     async (url) => {
         const response = await fetch(`https://www.reddit.com${url}.json`);
         const json = await response.json();
-        console.log(json);
         return mapComments(json[1])
     }
 )
@@ -38,4 +37,6 @@ export const commentsSlice = createSlice({
 
 export const selectComments = state => state.comments.comments;
 export const selectCommentsAreLoading = state => state.comments.commentsAreLoading;
+export const selectCommentsError = state => state.comments.commentsError;
+
 export default commentsSlice.reducer

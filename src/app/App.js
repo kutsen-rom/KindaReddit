@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Posts } from '../features/posts/Posts';
 import { SearchBar } from '../features/searchBar/SearchBar';
 import { Post } from '../features/posts/Post'
+import { ErrorPage } from '../components/errorPage/ErrorPage'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='comments/post/:postId' element={<Post />} />
         
       </Route>
+      <Route path='*' element={<ErrorPage />} />
     </Routes>
   );
 }
