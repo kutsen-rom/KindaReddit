@@ -20,13 +20,16 @@ export const SearchBar = () => {
   const when = params.when;
 
   useEffect(() => {
-    if (!params.postId) {
+    if (searchParams.get('search')) {
+      dispatch(loadPosts({category: '', when: '', search}))
+    } else if (!params.postId) {
       dispatch(loadPosts({category, when}));
     }
   }, [dispatch, category, when])
 
   useEffect(() => {
     setSearch(localStorage.getItem('search'))
+    
   }, [])
 
   const handleChange = ({ target }) => {

@@ -19,6 +19,7 @@
 }
 
 .preview a {
+    margin-top: 15px;
     width: 100%;
     word-break: break-all;
 }

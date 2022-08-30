@@ -7,6 +7,16 @@ export const Preview = ({ preview }) => {
   const dateCurrent = new Date().getTime();
   const content = decode(preview.selftext);
   const title = decode(preview.title);
+  let gallery = [];
+
+  const showMetaData = () => {
+    for (let key in preview.media_metadata) {
+        gallery.push(decode(preview.media_metadata[key].s.u))
+        console.log(key)
+    }
+  }
+  showMetaData();
+  console.log(gallery);
  
 
     return (
@@ -16,6 +26,9 @@ export const Preview = ({ preview }) => {
             {preview.post_hint === 'image' && 
             <a href={preview.url}><img width='100%' src={preview.url}></img></a>
         }
+            {gallery && gallery.map(image => {
+                return <a href={image}><img width='100%' src={image}></img></a> 
+            })}
             {preview.is_video && 
             <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls ></video>    }
             {preview.selftext && 

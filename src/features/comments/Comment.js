@@ -6,7 +6,6 @@ import { decode } from 'html-entities'
 
 export const Comment = ({ comment }) => {
   const nestedComments = (comment.data.replies ? comment.data.replies.data.children : []).map(comment => {
-    console.log(comment)
     return <Comment key={comment.data.id} comment={comment} type="child" />
   })
 
@@ -24,7 +23,7 @@ export const Comment = ({ comment }) => {
         <div>
           <p className='first-line'><b>u/{comment.data.author}</b> • posted {calculateTime(dateCreated, dateCurrent)}</p>
           <p dangerouslySetInnerHTML={{__html: content}}></p>
-          <p className='points'><b>{comment.data.score} points • {comment.data.replies && comment.data.replies.data.children.length} {comment.data.replies && comment.data.replies.data.children.length === 1 ? 'reply' : 'replies'}</b></p>
+          <p className='points'><b>{comment.data.score} {comment.data.score === 1 ? 'point' : 'points'} • {comment.data.replies && comment.data.replies.data.children.length} {comment.data.replies && comment.data.replies.data.children.length === 1 ? 'reply' : 'replies'}</b></p>
         </div>
       </div>
   {nestedComments}
