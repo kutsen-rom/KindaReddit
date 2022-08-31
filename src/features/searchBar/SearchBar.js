@@ -1,7 +1,6 @@
 import { Link, Outlet, useSearchParams, useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTheme, toggleTheme } from "../theme/themeSlice";
 import { loadPosts, selectIsLoading, selectPostsError } from "../posts/postsSlice";
 import './searchBar.css'
 import { LoadingPosts } from "../../components/loadingPosts/LoadingPosts";
@@ -10,8 +9,11 @@ import { ErrorPage } from "../../components/errorPage/ErrorPage";
 export const SearchBar = () => {
   const error = useSelector(selectPostsError);
   const isLoading = useSelector(selectIsLoading);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [ search, setSearch ] = useState('');
+  const [theme, setTheme] = useState(localStorage.getItem('theme'));
+
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -44,7 +46,6 @@ export const SearchBar = () => {
     localStorage.setItem('search', target.value);
   }
 
-  const theme = useSelector(selectTheme);
 
   useEffect(() => {
     if (!theme || theme === 'light') {
@@ -59,10 +60,10 @@ export const SearchBar = () => {
   const handleClick = () => {
     if (!theme || theme === 'light') {
       localStorage.setItem('theme', 'dark');
-      dispatch(toggleTheme('dark'));
+      setTheme('dark');
     } else {
       localStorage.setItem('theme', 'light');
-      dispatch(toggleTheme('light'))
+      setTheme('light');
     }
   }
 
