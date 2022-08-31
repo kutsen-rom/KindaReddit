@@ -1,11 +1,15 @@
 .preview {
     background-color: var(--color-background);
     width: 100%;
-    margin: 5px 0 5px 0;
+    margin: 5px 0;
     border-radius: 3px;
     border: 1px solid var(--color-post-border);
     padding: 0% 5%;
     overflow: hidden;
+}
+
+.posts .preview:hover {
+    border: 1px solid var(--color-post-border-hover);
 }
 
 .preview h3 {

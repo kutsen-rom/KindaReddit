@@ -20,7 +20,7 @@ export const Posts = () => {
       {isLoading ? 
         <h1>Loading...</h1> :
         <div className="posts">
-          {(params.subreddit !== 'popular' && !params.search) && 
+          {posts.every(post => post.subreddit === posts[0].subreddit) && 
           <div className='subreddit'>
             <Link to={`/${posts[0].subreddit}/hot`}><b>{posts[0].subredditPrefixed} • {posts[0].subscribers} subscribers</b></Link>
           </div>}

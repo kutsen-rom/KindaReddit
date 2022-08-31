@@ -1,4 +1,5 @@
 .search-bar {
+    z-index: 1;
     background-color: var(--color-background);
     display: flex;
     justify-content: space-around;
@@ -7,11 +8,12 @@
     border-bottom: 1px solid var(--color-line);
     position: sticky;
     top: 0;
+    overflow: hidden;
   }
    
   .search-bar .logo {
-    width: 150px;
-    height: 40px;
+    width: 12rem;
+    height: 4rem;
     background-image: url(../../../public/images/kindareddit-logo-theme-dark.svg);
     background-size: cover;
     background-position: center;

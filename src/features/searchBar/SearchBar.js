@@ -18,9 +18,13 @@ export const SearchBar = () => {
   const category = params.category ? params.category : '';
   const when = params.when;
   const subreddit = params.subreddit;
-
+  const searchUrl = searchParams.get('search');
+  let bool = !searchUrl;
+  let count = bool &&  1 ;
+  console.log(bool, count);
+  
   useEffect(() => {
-    if (searchParams.get('search')) {
+    if (searchUrl) {
       dispatch(loadPosts({category: '', when: '', search}))
     } else if (!params.postId && !subreddit) {
       dispatch(loadPosts({category, when}));

@@ -12,6 +12,7 @@
   --color-orange-button: rgb(255, 69, 0);
   --color-orange-button-hover:rgb(242, 64, 0);
   --color-orange-button-active:rgb(197, 53, 1);
+  --color-post-border-hover: rgb(118, 118, 118);
 }
 
 html[data-theme='light'] {
@@ -25,7 +26,7 @@ html[data-theme='light'] {
   --color-action-button: rgb(243, 244, 245);
   --color-action-button-hover: rgb(221, 222, 223);
   --color-action-button-active: rgb(197, 198, 199);
- 
+  --color-post-border-hover: rgb(155, 155, 155);
 }
 
 body {

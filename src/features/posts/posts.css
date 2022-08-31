@@ -15,15 +15,15 @@
 .subreddit {
     margin-top: 20px;
     width: 40%;
-    height: 70px;
+    height: 4.4rem;
     display: flex;
     align-items: center;
 }
 
 .subreddit a{
-    height: 40px;
+    height: 2.5rem;
     width: 300%;
-    padding-top: 10px;
+    padding-top: 0.8rem;
     background-color: rgb(255, 69, 0);
     color: white;
     text-align: center;

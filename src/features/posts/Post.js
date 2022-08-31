@@ -39,7 +39,7 @@ export const Post = () => {
             <Link to={`/${post.subreddit}/hot`} ><b>{post.subredditPrefixed} • {post.subscribers} subscribers</b></Link>
           </div>
           <div className='post'> 
-            <Preview  preview={post}/>
+            <Preview preview={post}/>
           </div>
           <h2>{post.num_comments} Comments</h2>
           <div className='comments-container'>
