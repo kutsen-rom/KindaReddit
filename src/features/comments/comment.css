@@ -3,13 +3,18 @@
     background-color: var(--color-post-border);
 }
 
+.comment blockquote {
+    border-left: 6px solid var(--color-post-border);
+    padding-left: 6px;
+}
+
 .comment {
     width: 96%;
     background-color: var(--color-background);
     border: 1px solid var(--color-post-border);
     border-radius: 3px;
     margin-top: 5px;
-    padding: 0 2%;
+    padding: 0 2% 1% 2%;
     overflow: hidden;
 }
 
@@ -46,4 +51,33 @@
 
 .comment a:visited {
     color: rgb(151, 40, 0);
+}
+
+@media only screen and (max-width: 1180px) {
+    .comment .first-line {
+        font-size: .9rem;
+    }
+    
+    .comment p {
+        font-size: 1rem;
+        
+    }
+    
+    .comment .points{
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .comment .first-line {
+        font-size: .8rem;
+    }
+    
+    .comment p {
+        font-size: 1rem;
+    }
+    
+    .comment .points{
+        font-size: .7rem;
+    }
 }

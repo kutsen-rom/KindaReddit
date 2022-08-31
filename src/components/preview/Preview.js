@@ -22,11 +22,15 @@ export const Preview = ({ preview }) => {
         {preview.thumbnail !== 'nsfw' && 
            <div className="preview">
            <div className='first-row-container'>
-               <Link to={`/${preview.subreddit}/hot`}><b>{preview.subredditPrefixed}</b></Link>
-               <p>&nbsp;• Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
+               <Link className='sub' to={`/${preview.subreddit}/hot`}><b>{preview.subredditPrefixed}</b></Link>
+               <p className='separator'>&nbsp;•&nbsp;</p>
+               <p>Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
            </div>
            <h3>{title}</h3>
-           <a href={preview.url}>{!preview.isRedditMediaDomain && !preview.domain.includes('self.') && !preview.domain.includes('reddit') && !preview.domain.includes('imgur')  ? preview.url : ''}</a>
+            <div className='link'>
+                <a href={preview.url}>{!preview.isRedditMediaDomain && !preview.domain.includes('self.') && !preview.domain.includes('reddit') && !preview.domain.includes('imgur')  ? preview.url : ''}</a>
+            </div>
+           
            {preview.postHint === 'image' && 
            <a href={preview.url}><img width='100%' src={preview.url}></img></a>
        }
@@ -36,7 +40,9 @@ export const Preview = ({ preview }) => {
            {preview.isVideo && 
            <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls ></video>}
            {preview.selftext && 
-           <p dangerouslySetInnerHTML={{__html: content}} className='content'></p>}
+            <div className='link'>
+                <p dangerouslySetInnerHTML={{__html: content}} className='content'></p>
+            </div>}
            <h6>{preview.score} {preview.score === 1 ? 'point' : 'points'} • {preview.numComments} {preview.numComments === 1 ? 'comment' : 'comments'}</h6>
        </div> }
     </>

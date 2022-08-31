@@ -42,3 +42,15 @@
     justify-content: space-between;
     align-items: center;
 }
+
+@media only screen and (max-width: 1180px) {
+    .loading-posts {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 525px) {
+    .loading-posts {
+        width: 90%;
+    }
+}

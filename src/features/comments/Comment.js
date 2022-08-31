@@ -21,7 +21,7 @@ export const Comment = ({ comment }) => {
         <div>
         </div>
         <div>
-          <p className='first-line'><b>u/{comment.data.author}</b> • posted {calculateTime(dateCreated, dateCurrent)}</p>
+          <p className='first-line'><b>u/{comment.data.author}</b> • {calculateTime(dateCreated, dateCurrent)}</p>
           <p dangerouslySetInnerHTML={{__html: content}}></p>
           <p className='points'><b>{comment.data.score} {comment.data.score === 1 ? 'point' : 'points'}{comment.data.replies && ' • ' + comment.data.replies.data.children.length} {comment.data.replies && comment.data.replies.data.children.length === 1 ? 'reply' : !comment.data.replies  ? '' : 'replies'}</b></p>
         </div>

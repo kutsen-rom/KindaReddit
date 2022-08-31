@@ -1,5 +1,4 @@
 import './post.css'
-import './posts.css'
 
 import { selectPosts } from "./postsSlice"
 import { useSelector, useDispatch } from "react-redux/es/exports";
@@ -36,12 +35,12 @@ export const Post = () => {
       {!post ? <ErrorPage /> : 
         <div className="post-container">
                <div className='subreddit'>
-            <Link to={`/${post.subreddit}/hot`} ><b>{post.subredditPrefixed} • {post.subscribers} subscribers</b></Link>
+            <Link to={`/${post.subreddit}/hot`} ><b>{post.subredditPrefixed}</b><div className='separate'>&nbsp;•&nbsp;</div><div><b>{post.subscribers} subscribers</b></div></Link>
           </div>
           <div className='post'> 
             <Preview preview={post}/>
           </div>
-          <h2>{post.num_comments} Comments</h2>
+          <h2>{post.numComments} Comments</h2>
           <div className='comments-container'>
             {areLoading ? 
             <><LoadingComments /><LoadingComments /><LoadingComments /></> 

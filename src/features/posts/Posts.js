@@ -1,4 +1,5 @@
 import './posts.css'
+import './post.css'
 
 import { useSelector } from "react-redux";
 import { selectPosts, selectIsLoading } from "../posts/postsSlice";
@@ -21,12 +22,12 @@ export const Posts = () => {
         <h1>Loading...</h1> :
         <div className="posts">
           {posts.every(post => post.subreddit === posts[0].subreddit) && 
-          <div className='subreddit'>
-            <Link to={`/${posts[0].subreddit}/hot`}><b>{posts[0].subredditPrefixed} • {posts[0].subscribers} subscribers</b></Link>
+          <div className='subreddit-posts'>
+            <Link to={`/${posts[0].subreddit}/hot`}><b>{posts[0].subredditPrefixed}<div className='separator-posts'>&nbsp;•&nbsp;</div><div>{posts[0].subscribers} subscribers</div></b></Link>
           </div>}
           <Sort />
           {posts.map(post => {
-            return <Link to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
+            return <Link className='post-box'  to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
           })}
         </div>
         }

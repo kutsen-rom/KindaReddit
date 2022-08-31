@@ -10,6 +10,7 @@ export const ErrorPage = () => {
         <h1>Something went wrong...</h1>
         <div className='error-buttons'>
           <button onClick={() => navigate(-1)}>Go Back</button>
+          <div className='space'></div>
           <button onClick={() => navigate('/')}>To main page</button>
         </div>
     </div>

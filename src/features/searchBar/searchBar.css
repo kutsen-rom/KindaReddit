@@ -60,5 +60,47 @@
     background-color: rgb(197, 53, 1);
     border: 5px solid rgb(197, 53, 1);
   }
+
+  @media only screen and (max-width: 1180px) {
+    .search-bar input {
+      font-size: 1rem;
+    }
+
+    .search-bar button {
+      font-size: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 680px) {
+    .search-bar button {
+      font-size: .8rem;
+    }
+
+    .search-bar input {
+      width: 90%;
+      font-size: .8rem;
+    }
+
+    .search-bar .logo {
+      width: 9rem;
+      height: 3rem;
+    }
+
+    .search-bar form {
+      width: 40%;
+    }
+  }
+
+  @media only screen and (max-width: 525px) {
+
+    .search-bar form {
+      width: 30%;
+    }
+
+    .search-bar .logo {
+      width: 6rem;
+      height: 2rem;
+    }
+  }
   
   

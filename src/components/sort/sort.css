@@ -10,7 +10,7 @@
 }
 
 .sort a {
-    width: 100px;
+    width: 6.3rem;
     height: 60%;
     background-color: var(--color-action-button);
     color: var(--color-text);
@@ -51,4 +51,60 @@
 
 .second-box {
     margin: 0 0 20px 0;
+}
+
+@media only screen and (max-width: 1180px) {
+    .sort {
+        width: 80%;
+    }
+
+    .sort a {
+        font-size: 1.16rem;
+    }
+}
+
+@media only screen and (max-width: 764px) {
+    .second-box a {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .sort {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .second-box a {
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .second-box a {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .first-box a {
+        font-size: .9rem;
+        height: 60%;
+    }
+
+    .first-box {
+        height: 3rem;
+    }
+    
+    .second-box a {
+        font-size: 0.58rem;
+        height: 40%;
+    }
+
+    .second-box {
+        height: 2.5rem;
+    }
+
+    
 }

@@ -14,11 +14,74 @@
     margin-top: 10px;
 }
 
-.post h2{
-    text-align: left;
-}
-
 .comments-container {
     width: 40%;
 }
+
+.subreddit {
+    margin-top: 20px;
+    width: 40%;
+    height: 4.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.subreddit a {
+    height: 2.5rem;
+    width: 300%;
+    padding-top: 0.8rem;
+    background-color: rgb(255, 69, 0);
+    color: white;
+    text-align: center;
+    border: 1px solid var(--color-post-border);
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.subreddit a:hover {
+    background-color: rgb(221, 60, 2);
+}
+
+.subreddit a:active {
+    background-color: rgb(190, 52, 2);
+}
+
+@media only screen and (max-width: 1180px) {
+    .post, .subreddit, .comments-container {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .post, .subreddit, .comments-container {
+        width: 100%;
+    }
+
+    .subreddit a {
+        font-size: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .subreddit a {
+        flex-direction: column;
+    }
+
+    .subreddit {
+        margin: 0;
+        height: 3rem;
+    }
+
+    .post-container h2 {
+        font-size: 1.1rem;
+    }
+
+    .separate {
+        display: none;
+    }
+}
+
+
 

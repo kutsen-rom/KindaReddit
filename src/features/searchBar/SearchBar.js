@@ -19,23 +19,20 @@ export const SearchBar = () => {
   const when = params.when;
   const subreddit = params.subreddit;
   const searchUrl = searchParams.get('search');
-  let bool = !searchUrl;
-  let count = bool &&  1 ;
-  console.log(bool, count);
   
   useEffect(() => {
     if (searchUrl) {
       dispatch(loadPosts({category: '', when: '', search}))
     } else if (!params.postId && !subreddit) {
       dispatch(loadPosts({category, when}));
-    } else if (subreddit && when) {
+    } else if (when) {
       dispatch(loadPosts({category, when, search, subreddit}));
-    } else if (subreddit && category) {
+    } else if (category) {
       dispatch(loadPosts({category, when: '', search: '', subreddit}));
     } else if (subreddit) {
       dispatch(loadPosts({category: '', when: '', search: '', subreddit}));
     }
-  }, [dispatch, category, when, subreddit])
+  }, [dispatch, category, when, subreddit, searchUrl])
 
   useEffect(() => {
     setSearch(localStorage.getItem('search'))
@@ -45,11 +42,7 @@ export const SearchBar = () => {
     setSearch(target.value);
     localStorage.setItem('search', target.value);
     const search = target.value;
-    if (search) {
-      setSearchParams({ search: search })
-    } else {
-      setSearchParams({});
-    }
+   
   }
 
   const theme = useSelector(selectTheme);
@@ -76,6 +69,11 @@ export const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (search) {
+      setSearchParams({ search: search })
+    } else {
+      setSearchParams({});
+    }
     dispatch(loadPosts({category: '', when: '', search}))
   }
 
@@ -84,7 +82,7 @@ export const SearchBar = () => {
       <div className="search-bar">
         <Link to='/popular/hot'><div className='logo' id='logo'></div></Link>
         <form onSubmit={handleSubmit}>
-          <input name="term" value={searchParams.get('search') || ''} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
+          <input name="term" value={search} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
         </form>
         <button onClick={handleClick}>Change theme</button>
       </div>

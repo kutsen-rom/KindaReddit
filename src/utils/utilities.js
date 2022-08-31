@@ -58,7 +58,6 @@ export const calculateTime = (dateCreated, dateCurrent) => {
       isVideo: post.data.is_video,
       selftext: post.data.selftext_html,
       preview: post.data.preview,
-      thumbnail: post.data.thumbnail,
       mediaMetadata: post.data.media_metadata,
       isRedditMediaDomain: post.data.is_reddit_media_domain,
       domain: post.data.domain,

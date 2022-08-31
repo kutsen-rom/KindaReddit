@@ -7,12 +7,19 @@
 .posts a {
     color: var(--color-text);
     text-decoration: none;
-    width: 40%;
-    display: flex;
-    justify-content: center;
 }
 
-.subreddit {
+.subreddit-posts a {
+    color: white;
+}
+
+.posts .post-box {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+}
+
+.subreddit-posts {
     margin-top: 20px;
     width: 40%;
     height: 4.4rem;
@@ -20,7 +27,12 @@
     align-items: center;
 }
 
-.subreddit a{
+.subreddit-posts b {
+    display: flex;
+    justify-content: center;
+}
+
+.subreddit-posts a {
     height: 2.5rem;
     width: 300%;
     padding-top: 0.8rem;
@@ -33,10 +45,40 @@
     font-size: 1.2rem;
 }
 
-.subreddit a:hover {
+.subreddit-posts a:hover {
     background-color: rgb(221, 60, 2);
 }
 
-.subreddit a:active {
+.subreddit-posts a:active {
     background-color: rgb(190, 52, 2);
+}
+
+@media only screen and (max-width: 1180px) {
+    .posts .post-box, .subreddit-posts {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .posts .post-box, .subreddit-posts {
+        width: 100%;
+    }
+
+    .subreddit-posts a {
+        font-size: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .subreddit-posts b {
+        flex-direction: column;
+    }
+
+    .subreddit-posts {
+        margin: 0;
+        height: 3rem;
+    }
+
+    .separator-posts {
+        display: none;
+    }
 }
