@@ -12,6 +12,10 @@
     border: 1px solid var(--color-post-border-hover);
 }
 
+.posts .preview h3 {
+    margin: 0;
+}
+
 .preview h3 {
     margin-top: 0;
 }
@@ -30,7 +34,21 @@
     width: auto;
     margin-top: 15px;
     word-break: break-all;
-    color: var(--color-text)
+    color: var(--color-orange-button);
+    text-decoration: underline;
+}
+
+.preview a:hover {
+    color: rgb(221, 60, 2);
+    text-decoration: none;
+}
+
+.preview a:active {
+    color: rgb(190, 52, 2);
+}
+
+.preview a:visited {
+    color: rgb(151, 40, 0);
 }
 
 .preview .first-row-container {
@@ -44,9 +62,7 @@
     font-size: 0.75rem;
  }
 
- .preview a:hover {
-    text-decoration: underline;
- }
+
 
 
 

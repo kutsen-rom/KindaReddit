@@ -19,6 +19,7 @@ html[data-theme='light'] {
   --color-canvas: rgb(218, 224, 230);
   --color-background: rgb(255, 255, 255);
   --color-text: rgb(34, 34, 34);
+  --color-text-hover: rgb(215, 218, 220);
   --color-line: rgb(237, 239, 241);
   --color-input-field: rgb(246, 247, 248);
   --color-post-border: rgb(204, 204, 204);

@@ -10,7 +10,7 @@ export const Comment = ({ comment }) => {
   })
 
   const dateCreated = new Date().getTime();
-  const dateCurrent = new Date(comment.data.createdUtc * 1000)
+  const dateCurrent = new Date(comment.data.created_utc * 1000)
   const content = decode(comment.data.body_html);
 
   return (<>
