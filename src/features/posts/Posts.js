@@ -2,23 +2,29 @@ import './posts.css'
 
 import { useSelector } from "react-redux";
 import { selectPosts, selectIsLoading } from "../posts/postsSlice";
-import { Filter } from "../../components/filter/Filter";
-import { Link } from 'react-router-dom';
+import { Sort } from "../../components/sort/Sort";
+import { Link, useParams } from 'react-router-dom';
 import { Preview } from "../../components/preview/Preview";
 
 export const Posts = () => {
   const posts = useSelector(selectPosts);
   const isLoading = useSelector(selectIsLoading);
-  
+  const params = useParams();
 
 
 
   return (
+    
     <div className="posts-container">
+      {window.scrollTo(0, 0)}
       {isLoading ? 
         <h1>Loading...</h1> :
         <div className="posts">
-          <Filter />
+          {(params.subreddit !== 'popular' && !params.search) && 
+          <div className='subreddit'>
+            <Link to={`/${posts[0].subreddit}/hot`}><b>{posts[0].subredditPrefixed} • {posts[0].subscribers} subscribers</b></Link>
+          </div>}
+          <Sort />
           {posts.map(post => {
             return <Link to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
           })}

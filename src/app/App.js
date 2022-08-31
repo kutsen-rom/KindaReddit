@@ -9,12 +9,11 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<SearchBar />}> 
-        <Route index element={<Navigate to="hot" />} />
-        <Route path=':category' element={<Posts />}>
+        <Route index element={<Navigate to="popular/hot" />} />
+        <Route path=':subreddit/:category' element={<Posts />}>
           <Route path=':when' element={<Posts />} />
         </Route>
         <Route path='comments/post/:postId' element={<Post />} />
-        <Route path='subreddit/r/:subreddit' element={<Posts />}/>
       </Route>
       <Route path='*' element={<ErrorPage />} />
     </Routes>

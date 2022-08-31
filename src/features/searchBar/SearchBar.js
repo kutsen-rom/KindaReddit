@@ -24,10 +24,14 @@ export const SearchBar = () => {
       dispatch(loadPosts({category: '', when: '', search}))
     } else if (!params.postId && !subreddit) {
       dispatch(loadPosts({category, when}));
+    } else if (subreddit && when) {
+      dispatch(loadPosts({category, when, search, subreddit}));
+    } else if (subreddit && category) {
+      dispatch(loadPosts({category, when: '', search: '', subreddit}));
     } else if (subreddit) {
       dispatch(loadPosts({category: '', when: '', search: '', subreddit}));
     }
-  }, [dispatch, category, when])
+  }, [dispatch, category, when, subreddit])
 
   useEffect(() => {
     setSearch(localStorage.getItem('search'))
@@ -74,7 +78,7 @@ export const SearchBar = () => {
 	return(
     <>
       <div className="search-bar">
-        <Link to='/'><div className='logo' id='logo'></div></Link>
+        <Link to='/popular/hot'><div className='logo' id='logo'></div></Link>
         <form onSubmit={handleSubmit}>
           <input name="term" value={searchParams.get('search') || ''} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
         </form>

@@ -1,8 +1,9 @@
 import './post.css'
+import './posts.css'
 
 import { selectPosts } from "./postsSlice"
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { loadComments, selectComments, selectCommentsAreLoading, selectCommentsError} from '../comments/commentsSlice';
 import { useEffect } from 'react';
 import { Preview } from '../../components/preview/Preview';
@@ -23,7 +24,7 @@ export const Post = () => {
 
     useEffect(() => {
       try {
-    window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
         dispatch(loadComments(post.permalink));
       } catch (err) {
       }
@@ -34,6 +35,9 @@ export const Post = () => {
       <>
       {!post ? <ErrorPage /> : 
         <div className="post-container">
+               <div className='subreddit'>
+            <Link to={`/${post.subreddit}/hot`} ><b>{post.subredditPrefixed} • {post.subscribers} subscribers</b></Link>
+          </div>
           <div className='post'> 
             <Preview  preview={post}/>
           </div>

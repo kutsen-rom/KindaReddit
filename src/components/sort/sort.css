@@ -1,5 +1,4 @@
-.filter {
-    margin: 10px 0 15px 0;
+.sort {
     width: 40%;
     height: 60px;
     background-color: var(--color-background);
@@ -10,7 +9,7 @@
     border-radius: 3px;
 }
 
-.filter a {
+.sort a {
     width: 100px;
     height: 60%;
     background-color: var(--color-action-button);
@@ -24,24 +23,32 @@
     text-decoration: none;
 }
 
-.filter a:hover {
+.sort a:hover {
     cursor: pointer;
     background-color: var(--color-action-button-hover);
 }
 
-.filter a:active {
+.sort a:active {
     background-color: var(--color-action-button-active);
 }
 
-.filter .active {
+.sort .active {
     background-color: rgb(255, 69, 0);
     color: white;
 }
 
-.filter .active:hover {
+.sort .active:hover {
     background-color: rgb(242, 64, 0);
 }
 
-.filter .active:active {
+.sort .active:active {
     background-color: rgb(197, 53, 1);
+}
+
+.first-box {
+    margin: 15px 0 15px 0;
+}
+
+.second-box {
+    margin: 0 0 20px 0;
 }
