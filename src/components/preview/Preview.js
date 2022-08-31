@@ -32,10 +32,10 @@ export const Preview = ({ preview }) => {
             </div>
            
            {preview.postHint === 'image' && 
-           <a href={preview.url}><img width='100%' src={preview.url}></img></a>
+           <a href={preview.url}><img width='100%' alt='' src={preview.url}></img></a>
        }
            {gallery && gallery.map(image => {
-               return <a href={image}><img width='100%' src={image}></img></a> 
+               return <a href={image}><img width='100%' alt='' src={image}></img></a> 
            })}
            {preview.isVideo && 
            <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls ></video>}

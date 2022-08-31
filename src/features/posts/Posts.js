@@ -4,15 +4,12 @@ import './post.css'
 import { useSelector } from "react-redux";
 import { selectPosts, selectIsLoading } from "../posts/postsSlice";
 import { Sort } from "../../components/sort/Sort";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Preview } from "../../components/preview/Preview";
 
 export const Posts = () => {
   const posts = useSelector(selectPosts);
   const isLoading = useSelector(selectIsLoading);
-  const params = useParams();
-
-
 
   return (
     

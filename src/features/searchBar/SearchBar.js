@@ -32,6 +32,7 @@ export const SearchBar = () => {
     } else if (subreddit) {
       dispatch(loadPosts({category: '', when: '', search: '', subreddit}));
     }
+    // eslint-disable-next-line
   }, [dispatch, category, when, subreddit, searchUrl])
 
   useEffect(() => {
@@ -41,8 +42,6 @@ export const SearchBar = () => {
   const handleChange = ({ target }) => {
     setSearch(target.value);
     localStorage.setItem('search', target.value);
-    const search = target.value;
-   
   }
 
   const theme = useSelector(selectTheme);

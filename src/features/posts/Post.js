@@ -27,6 +27,7 @@ export const Post = () => {
         dispatch(loadComments(post.permalink));
       } catch (err) {
       }
+      // eslint-disable-next-line
     }, [])
 
 
