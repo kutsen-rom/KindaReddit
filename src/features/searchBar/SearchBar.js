@@ -1,4 +1,4 @@
-import { Link, Outlet, useSearchParams, useParams } from "react-router-dom"
+import { Link, Outlet, useSearchParams, useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadPosts, selectIsLoading, selectPostsError } from "../posts/postsSlice";
@@ -16,6 +16,7 @@ export const SearchBar = () => {
 
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const category = params.category ? params.category : '';
   const when = params.when;
@@ -24,14 +25,15 @@ export const SearchBar = () => {
   
   useEffect(() => {
     if (searchUrl) {
+      navigate(`/popular/hot/?search=${search}`)
       dispatch(loadPosts({category: '', when: '', search}))
-    } else if (!params.postId && !subreddit && category) {
+    } else if (!params.postId && !subreddit && category && !searchUrl) {
       dispatch(loadPosts({category, when}));
-    } else if (when) {
+    } else if (when && !searchUrl) {
       dispatch(loadPosts({category, when, search, subreddit}));
-    } else if (category) {
+    } else if (category && !searchUrl) {
       dispatch(loadPosts({category, when: '', search: '', subreddit}));
-    } else if (subreddit) {
+    } else if (subreddit && !searchUrl) {
       dispatch(loadPosts({category: '', when: '', search: '', subreddit}));
     }
     // eslint-disable-next-line
@@ -78,7 +80,7 @@ export const SearchBar = () => {
 	return(
     <>
       <div className="search-bar">
-        <Link to='/popular/hot'><div className='logo' id='logo'></div></Link>
+        <Link to='/'><div className='logo' id='logo'></div></Link>
         <form onSubmit={handleSubmit}>
           <input name="term" value={search} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
         </form>

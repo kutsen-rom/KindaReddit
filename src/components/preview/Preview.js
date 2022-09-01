@@ -1,5 +1,5 @@
 import './preview.css'
-import { calculateTime, parseNumbers } from '../../utils/utilities';
+import { calculateTime, parseNumbers, getAudioUrl } from '../../utils/utilities';
 import { decode } from 'html-entities'
 import { Link } from 'react-router-dom'
 
@@ -9,6 +9,14 @@ export const Preview = ({ preview }) => {
   const content = decode(preview.selftext);
   const title = decode(preview.title);
   let gallery = [];
+  const audioSource = preview.isVideo && getAudioUrl(preview.video.fallback_url);
+    const audio = new Audio(audioSource);
+    const handlePlay = () => {
+        audio.play();
+    }
+    const handlePause = () => {
+        audio.pause();
+    }
 
   const showMetaData = () => {
     for (let key in preview.mediaMetadata) {
@@ -40,7 +48,12 @@ export const Preview = ({ preview }) => {
            })}
 
            {preview.isVideo && 
-           <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls ></video>}
+            <video onPlay={handlePlay} onPause={handlePause} width='100%' controls muted>
+                <source src={preview.video.fallback_url} type="video/mp4" />
+                <audio controls>
+                    <source src="https://v.redd.it/xe7n6luqhnj91/DASH_audio.mp4?source=fallback" type="audio/mpeg"/>
+                </audio>
+            </video>}
 
            {preview.selftext && 
             <div className='link'>
@@ -52,3 +65,23 @@ export const Preview = ({ preview }) => {
         
     )
 }
+
+//!        <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls muted></video>}
+
+/* 
+<video id="myvideo" controls muted>
+    <source src="path/to/video.mp4" type="video/mp4" />
+    <audio id="myaudio" controls>
+        <source src="path/to/audio.mp3" type="audio/mpeg"/>
+    </audio>
+</video>
+
+<script>
+var myvideo = document.getElementById("myvideo");
+var myaudio = document.getElementById("myaudio");
+myvideo.onplay  = function() { myaudio.play();  }
+myvideo.onpause = function() { myaudio.pause(); }
+</script>
+
+
+*/
