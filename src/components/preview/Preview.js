@@ -1,5 +1,5 @@
 import './preview.css'
-import { calculateTime } from '../../utils/utilities';
+import { calculateTime, parseNumbers } from '../../utils/utilities';
 import { decode } from 'html-entities'
 import { Link } from 'react-router-dom'
 
@@ -26,6 +26,7 @@ export const Preview = ({ preview }) => {
                <p className='separator'>&nbsp;•&nbsp;</p>
                <p>Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
            </div>
+           
            <h3>{title}</h3>
             <div className='link'>
                 <a href={preview.url}>{!preview.isRedditMediaDomain && !preview.domain.includes('self.') && !preview.domain.includes('reddit') && !preview.domain.includes('imgur')  ? preview.url : ''}</a>
@@ -37,13 +38,15 @@ export const Preview = ({ preview }) => {
            {gallery && gallery.map(image => {
                return <a href={image}><img width='100%' alt='' src={image}></img></a> 
            })}
+
            {preview.isVideo && 
            <video width='100%' type="video/mp4" src={preview.video.fallback_url} controls ></video>}
+
            {preview.selftext && 
             <div className='link'>
                 <p dangerouslySetInnerHTML={{__html: content}} className='content'></p>
             </div>}
-           <h6>{preview.score} {preview.score === 1 ? 'point' : 'points'} • {preview.numComments} {preview.numComments === 1 ? 'comment' : 'comments'}</h6>
+           <h6>{parseNumbers(preview.score)} {preview.score === 1 ? 'point' : 'points'} • {parseNumbers(preview.numComments)} {preview.numComments === 1 ? 'comment' : 'comments'}</h6>
        </div> }
     </>
         

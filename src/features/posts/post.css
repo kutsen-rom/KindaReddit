@@ -56,22 +56,20 @@
 }
 
 @media only screen and (max-width: 680px) {
-    .post, .subreddit, .comments-container {
+    .post, .comments-container {
         width: 100%;
     }
 
     .subreddit a {
         font-size: 1rem;
         padding-bottom: 0.5rem;
-    }
-
-    .subreddit a {
         flex-direction: column;
     }
 
     .subreddit {
         margin: 0;
         height: 3rem;
+        width: 110%;
     }
 
     .post-container h2 {

@@ -60,7 +60,7 @@
 }
 
 @media only screen and (max-width: 680px) {
-    .posts .post-box, .subreddit-posts {
+    .posts .post-box {
         width: 100%;
     }
 
@@ -76,6 +76,7 @@
     .subreddit-posts {
         margin: 0;
         height: 3rem;
+        width: 110%;
     }
 
     .separator-posts {

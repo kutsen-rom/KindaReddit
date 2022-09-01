@@ -40,40 +40,56 @@ export const calculateTime = (dateCreated, dateCurrent) => {
 
    }
 
-   export const mapPosts = (json) => {
-    return json.data.children.map(post => ({
-      author: post.data.author,
-      subredditPrefixed: post.data.subreddit_name_prefixed,
-      subreddit: post.data.subreddit,
-      subscribers: post.data.subreddit_subscribers,
-      title: post.data.title,
-      id: post.data.id,
-      createdUtc: post.data.created_utc,
-      numComments: post.data.num_comments,
-      permalink: post.data.permalink,
-      score: post.data.score,
-      url: post.data.url,
-      postHint: post.data.post_hint,
-      thumbnail: post.data.thumbnail,
-      isVideo: post.data.is_video,
-      selftext: post.data.selftext_html,
-      preview: post.data.preview,
-      mediaMetadata: post.data.media_metadata,
-      isRedditMediaDomain: post.data.is_reddit_media_domain,
-      domain: post.data.domain,
-      ...(post.data.media) && {video: post.data.media.reddit_video}
-  }));
-  }
+  export const mapPosts = (json) => {
+  return json.data.children.map(post => ({
+    author: post.data.author,
+    subredditPrefixed: post.data.subreddit_name_prefixed,
+    subreddit: post.data.subreddit,
+    subscribers: post.data.subreddit_subscribers,
+    title: post.data.title,
+    id: post.data.id,
+    createdUtc: post.data.created_utc,
+    numComments: post.data.num_comments,
+    permalink: post.data.permalink,
+    score: post.data.score,
+    url: post.data.url,
+    postHint: post.data.post_hint,
+    thumbnail: post.data.thumbnail,
+    isVideo: post.data.is_video,
+    selftext: post.data.selftext_html,
+    preview: post.data.preview,
+    mediaMetadata: post.data.media_metadata,
+    isRedditMediaDomain: post.data.is_reddit_media_domain,
+    domain: post.data.domain,
+    ...(post.data.media) && {video: post.data.media.reddit_video}
+}));
+}
 
-  export const mapComments = (json) => {
-    return json.data.children.map(comment => ({
-      data: {
-        id: comment.data.id,
-        author: comment.data.author,
-        created_utc: comment.data.created_utc,
-        score: comment.data.score,
-        body_html: comment.data.body_html,
-        replies: comment.data.replies
-      }
-    }))
-  }
+export const mapComments = (json) => {
+  return json.data.children.map(comment => ({
+    data: {
+      id: comment.data.id,
+      author: comment.data.author,
+      created_utc: comment.data.created_utc,
+      score: comment.data.score,
+      body_html: comment.data.body_html,
+      replies: comment.data.replies
+    }
+  }))
+}
+
+export const parseNumbers = (number) => {
+  const num = number.toString();
+  const length = num.length;
+  if (length === 4 || length === 5) {
+    return num.slice(0, length-3) + ',' + num.slice(length-3, length-2) + 'k'
+    } else if (length === 6) {
+    return num.slice(0, length-3) + 'k' 
+    } else if (length === 7 || length === 8) {
+      return num.slice(0, length-6) + ',' + num.slice(length-6, length-5) + 'm' 
+    } else if (length === 9) {
+      return num.slice(0, length-6) + 'm' 
+    } else {
+      return num
+    }
+}

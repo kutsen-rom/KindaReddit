@@ -20,6 +20,7 @@
 .row-comments {
     background-color: var(--color-canvas);
     width: 90%;
+    overflow: hidden;
 }
 
 .title-comments {
