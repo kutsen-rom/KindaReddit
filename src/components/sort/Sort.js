@@ -23,7 +23,9 @@ export const Sort = () => {
           <NavLink to={`/${subreddit}/top/day`} className={({isActive}) => (!when || isActive ? 'active' : 'none')}><b>Today</b></NavLink>
           <NavLink to={`/${subreddit}/top/week`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>This Week</b></NavLink>
           <NavLink to={`/${subreddit}/top/month`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>This Month</b></NavLink>
-          <NavLink to={`/${subreddit}/top/year`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>This Year</b></NavLink>
+          {subreddit !== 'popular' && 
+            <NavLink to={`/${subreddit}/top/year`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>This Year</b></NavLink>
+          }
           <NavLink to={`/${subreddit}/top/all`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>All Time</b></NavLink>
         </div>  
       }
