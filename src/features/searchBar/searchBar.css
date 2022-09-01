@@ -80,6 +80,7 @@
     .search-bar input {
       width: 90%;
       font-size: .8rem;
+      height: 1.7rem;
     }
 
     .search-bar .logo {

@@ -26,7 +26,8 @@ export const Posts = () => {
              return <Link className='post-box'  to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
            })}
             </div>
-        </div> }
+        </div>
+         }
     </>
     
   )
