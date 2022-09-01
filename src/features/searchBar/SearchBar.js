@@ -11,7 +11,7 @@ export const SearchBar = () => {
   const isLoading = useSelector(selectIsLoading);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [ search, setSearch ] = useState('');
+  const [search, setSearch ] = useState('');
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
   const params = useParams();
@@ -24,19 +24,14 @@ export const SearchBar = () => {
   
   useEffect(() => {
     if (searchUrl) {
-      console.log(111)
       dispatch(loadPosts({category: '', when: '', search}))
     } else if (!params.postId && !subreddit && category) {
-      console.log(222)
       dispatch(loadPosts({category, when}));
     } else if (when) {
-      console.log(333)
       dispatch(loadPosts({category, when, search, subreddit}));
     } else if (category) {
-      console.log(444)
       dispatch(loadPosts({category, when: '', search: '', subreddit}));
     } else if (subreddit) {
-      console.log(555)
       dispatch(loadPosts({category: '', when: '', search: '', subreddit}));
     }
     // eslint-disable-next-line

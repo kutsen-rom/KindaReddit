@@ -12,19 +12,22 @@ export const Posts = () => {
   const posts = useSelector(selectPosts);
 
   return (
+    <>
+      {posts &&
+        <div className="posts-container">
+          {window.scrollTo(0, 0)}
+            <div className="posts">
+            {posts.every(post => post.subreddit === posts[0].subreddit) && 
+              <div className='subreddit-posts'>
+                <Link to={`/${posts[0].subreddit}/hot`}><b>{posts[0].subredditPrefixed}<div className='separator-posts'>&nbsp;•&nbsp;</div><div>{parseNumbers(posts[0].subscribers)} subscribers</div></b></Link>
+              </div>}
+           <Sort />
+           {posts.map(post => {
+             return <Link className='post-box'  to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
+           })}
+            </div>
+        </div> }
+    </>
     
-    <div className="posts-container">
-      {window.scrollTo(0, 0)}
-        <div className="posts">
-          {posts.every(post => post.subreddit === posts[0].subreddit) && 
-          <div className='subreddit-posts'>
-            <Link to={`/${posts[0].subreddit}/hot`}><b>{posts[0].subredditPrefixed}<div className='separator-posts'>&nbsp;•&nbsp;</div><div>{parseNumbers(posts[0].subscribers)} subscribers</div></b></Link>
-          </div>}
-          <Sort />
-          {posts.map(post => {
-            return <Link className='post-box'  to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
-          })}
-        </div>
-    </div>
   )
 }
