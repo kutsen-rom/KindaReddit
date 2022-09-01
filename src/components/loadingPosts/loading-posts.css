@@ -5,12 +5,12 @@
 }
 
 .slider {
-    width: 15%;
+    width: 100%;
     height: 100%;
-    left: -15%;
     background: linear-gradient(0.75turn, var(--color-canvas) , var(--color-background) , var(--color-canvas));
     position: relative;
     animation: 1s linear infinite forwards sliding;
+    left: -100%;
 }
 
 .s-2 {
@@ -102,7 +102,7 @@
 
 @keyframes sliding {
     0% {
-         left: -15%;
+         left: -100%;
     }
 
     80% {

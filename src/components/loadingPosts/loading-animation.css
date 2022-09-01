@@ -1,0 +1,58 @@
+.slider {
+    width: 15%;
+    height: 100%;
+    left: -15%;
+    background: linear-gradient(0.75turn, var(--color-canvas) , var(--color-background) , var(--color-canvas));
+    position: relative;
+    animation: 1s linear infinite forwards sliding;
+}
+
+.s-2 {
+    animation-delay: 0.03s;
+}
+
+.s-3 {
+    animation-delay: 0.05s;
+}
+
+.s-4 {
+    animation-delay: 0.07s;
+}
+
+.s-5 {
+    animation-delay: 0.09s;
+}
+
+.s-6 {
+    animation-delay: 0.11s;
+}
+
+.s-7 {
+    animation-delay: 0.13s;
+}
+
+.s-8 {
+    animation-delay: 0.15s;
+}
+
+.s-9 {
+    animation-delay: 0.17s;
+}
+
+.s-10 {
+    animation-delay: 0.19s;
+}
+
+@keyframes sliding {
+    0% {
+         left: -15%;
+    }
+
+    80% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}

@@ -5,7 +5,7 @@ export const loadPosts = createAsyncThunk(
   'posts/loadPosts',
   async ({category, when, search, subreddit}) => {
       if (when) {
-        const response = await fetch(`https://www.reddit.com/r/${subreddit}/${category}.json?t=${when}&limit=3`);
+        const response = await fetch(`https://www.reddit.com/r/${subreddit}/${category}.json?t=${when}&limit=100`);
         const json = await response.json();
         localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
         return mapPosts(json);
@@ -15,7 +15,7 @@ export const loadPosts = createAsyncThunk(
           localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
           return mapPosts(json);
       }  else {
-          const response = await fetch(`https://www.reddit.com/r/${subreddit}/${category}.json?limit=3`);
+          const response = await fetch(`https://www.reddit.com/r/${subreddit}/${category}.json?limit=100`);
           const json = await response.json();
           localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
           return mapPosts(json);

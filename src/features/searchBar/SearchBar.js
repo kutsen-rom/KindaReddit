@@ -24,14 +24,19 @@ export const SearchBar = () => {
   
   useEffect(() => {
     if (searchUrl) {
+      console.log(111)
       dispatch(loadPosts({category: '', when: '', search}))
-    } else if (!params.postId && !subreddit) {
+    } else if (!params.postId && !subreddit && category) {
+      console.log(222)
       dispatch(loadPosts({category, when}));
     } else if (when) {
+      console.log(333)
       dispatch(loadPosts({category, when, search, subreddit}));
     } else if (category) {
+      console.log(444)
       dispatch(loadPosts({category, when: '', search: '', subreddit}));
     } else if (subreddit) {
+      console.log(555)
       dispatch(loadPosts({category: '', when: '', search: '', subreddit}));
     }
     // eslint-disable-next-line
@@ -45,7 +50,6 @@ export const SearchBar = () => {
     setSearch(target.value);
     localStorage.setItem('search', target.value);
   }
-
 
   useEffect(() => {
     if (!theme || theme === 'light') {
@@ -74,7 +78,6 @@ export const SearchBar = () => {
     } else {
       setSearchParams({});
     }
-    dispatch(loadPosts({category: '', when: '', search}))
   }
 
 	return(
