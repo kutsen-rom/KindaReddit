@@ -149,6 +149,7 @@ const handleTouchEnd = () => {
                                         className={`${((index < currentImage && currentImage !== gallery.length - 1) || (currentImage === 0 && index === gallery.length - 1)) 
                                             ? 'left-hide' 
                                             : (index > currentImage ||  (index === 0 && currentImage === gallery.length - 1)) 
+
                                             ? 'right-hide' 
                                             : 'current'}`} 
                                         width='100%' 
