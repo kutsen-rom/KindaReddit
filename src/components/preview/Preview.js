@@ -2,6 +2,7 @@ import './preview.css'
 import { calculateTime, parseNumbers, getAudioUrl } from '../../utils/utilities';
 import { decode } from 'html-entities'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react';
 
 export const Preview = ({ preview }) => {
   const dateCreated = new Date(preview.createdUtc * 1000);
@@ -9,6 +10,7 @@ export const Preview = ({ preview }) => {
   const content = decode(preview.selftext);
   const title = decode(preview.title);
   let gallery = [];
+
   const audioSource = preview.isVideo && getAudioUrl(preview.video.fallback_url);
     const audio = new Audio(audioSource);
     const handlePlay = () => {
@@ -18,11 +20,24 @@ export const Preview = ({ preview }) => {
         audio.pause();
     }
 
+    const handleTimeUpdate = (e) => {
+        console.log(e.target.currentTime)
+        audio.currentTime = e.target.currentTime;
+      }
+
   const showMetaData = () => {
     for (let key in preview.mediaMetadata) {
         gallery.push(decode(preview.mediaMetadata[key].s.u))
     }
   }
+
+  useEffect(() => {
+    return () => {
+        audio.pause()
+        console.log("in cleanup")
+    }
+})
+
   showMetaData();
  
     return (
@@ -48,7 +63,7 @@ export const Preview = ({ preview }) => {
            })}
 
            {preview.isVideo && 
-            <video onPlay={handlePlay} onPause={handlePause} width='100%' controls muted>
+            <video onPlay={handlePlay} onPause={handlePause} onTimeUpdate={handleTimeUpdate} onAbort={handlePause} width='100%' controls muted>
                 <source src={preview.video.fallback_url} type="video/mp4" />
                 <audio controls>
                     <source src="https://v.redd.it/xe7n6luqhnj91/DASH_audio.mp4?source=fallback" type="audio/mpeg"/>
