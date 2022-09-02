@@ -61,9 +61,11 @@ export const Preview = ({ preview }) => {
 
 //    SWIPE FOR DEVICES
 
-const [touchStart, setTouchStart] = useState(null)
-const [touchEnd, setTouchEnd] = useState(null)
+const [touchStart, setTouchStart] = useState(null);
+const [touchEnd, setTouchEnd] = useState(null);
+const [isLeftSwipe, setIsLeftSwipe] = useState(false);
 
+console.log(touchEnd)
 const minSwipeDistance = 50 
 
 const handleTouchStart = (e) => {
@@ -76,9 +78,11 @@ const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
 const handleTouchEnd = () => {
   if (!touchStart || !touchEnd) return
   const distance = touchStart - touchEnd
-  const isLeftSwipe = distance > minSwipeDistance
-  const isRightSwipe = distance < -minSwipeDistance
-  if (isLeftSwipe || isRightSwipe) isLeftSwipe ? handleLeftClick() : handleRightClick();
+  setIsLeftSwipe(distance > minSwipeDistance);
+  const isRightSwipe = distance < -minSwipeDistance;
+  if (isLeftSwipe || isRightSwipe) {
+    isLeftSwipe ? handleLeftClick() : handleRightClick();
+  }
 }
 
     return (
@@ -119,7 +123,6 @@ const handleTouchEnd = () => {
             </figure>
        }
 
-
             {/* IMAGE GALLERY */}
            {gallery.length > 0 && 
                 <figure onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} className='gallery-container'>
@@ -128,7 +131,7 @@ const handleTouchEnd = () => {
                             <Link onClick={(e) => {e.preventDefault()}} to=''><button onClick={handleLeftClick} className='chevron chevron-left'></button></Link>
                         </>}
                     <a href={gallery[0]}>
-                        <img className={imgToShow - 0 !== 1 ? 'img-hide abs' : 'abs'} width='100%' alt='' src={gallery[0]}></img>
+                        <img style={{transform: `translateX(${isLeftSwipe && (touchStart - touchEnd) / 5}%)` , position: 'relative'}}  className={imgToShow - 0 !== 1 ? 'img-hide abs' : 'abs'} width='100%' alt='' src={gallery[0]}></img>
                     </a> 
                     {gallery.map((image, index) => {
                         if (index !== 0) {
