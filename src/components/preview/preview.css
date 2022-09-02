@@ -76,6 +76,76 @@
     text-decoration: underline;
 }
 
+.preview figure {
+    width: 100%;
+    margin: 0;
+    max-height: 512px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.preview .gallery-container {
+    height: 512px;
+}
+
+.preview figure img {
+    max-width: 100%;
+    max-height: 512px;
+}
+
+.preview video {
+    max-width: 100%;
+    max-height: 512px;
+}
+
+.preview .img-hide {
+   display: none;
+}
+
+.preview .chevron {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 0;
+    font-size: 2rem;
+    background-color: transparent;
+    box-shadow: 0 0 2px black;
+    position: absolute;
+}
+
+.preview .chevron-left {
+    background-image: url(../../../public/images/chevron-left.svg);
+    left: 0;
+}
+
+.preview .chevron-right {
+    background-image: url(../../../public/images/chevron-right.svg);
+    right: 0
+}
+
+.preview .chevron:hover {
+    cursor: pointer;
+    box-shadow: 0 0 3px black;
+}
+
+.preview .chevron:active {
+    cursor: pointer;
+    box-shadow: 0 0 4px black;
+}
+
+.preview .img-counter {
+    background-color: var(--color-counter);
+    color: white;
+    width: 3rem;
+    text-align: center;
+    border-radius: 20px;
+    align-self: start;
+    position: absolute;
+    right: 1rem;
+}
+
 @media only screen and (max-width: 1180px) {
     .posts .preview:hover {
         border: 1px solid var(--color-post-border);
@@ -96,6 +166,13 @@
 }
 
 @media only screen and (max-width: 680px) {
+
+
+    .preview .gallery-container {
+        height: 200px;
+        overflow: hidden;
+    }
+
     .preview h3 {
         font-size: 1.2rem;
     }
