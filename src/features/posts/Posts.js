@@ -7,6 +7,7 @@ import { Sort } from "../../components/sort/Sort";
 import { Link } from 'react-router-dom';
 import { Preview } from "../../components/preview/Preview";
 import { parseNumbers } from '../../utils/utilities';
+import { BackToTop } from '../../components/backToTop/BackToTop';
 
 export const Posts = () => {
   const posts = useSelector(selectPosts);
@@ -26,6 +27,7 @@ export const Posts = () => {
              return <Link className='post-box'  to={`/comments/post/${post.id}`}><Preview key={post.id} preview={post}/></Link>
            })}
             </div>
+            <BackToTop />
         </div>
          }
     </>

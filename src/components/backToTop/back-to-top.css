@@ -1,0 +1,29 @@
+.back {
+    position: fixed;
+    right: 11.5%;
+    bottom: 5%;
+    background-color: var(--color-orange-button);
+    border: 0px;
+    border-radius: 40px;
+    padding: 0.5rem 1rem;
+    color: white;
+}
+
+.back:hover {
+    cursor: pointer;
+    background-color: rgb(221, 60, 2);
+}
+
+.back:active {
+    background-color: rgb(190, 52, 2);
+}
+
+.hidden {
+    display: none;
+}
+
+@media only screen and (max-width: 1180px) {
+    .back {
+        display: none;
+    }
+}
