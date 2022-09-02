@@ -129,4 +129,9 @@
         border-right: 1px solid var(--color-background);
     }
 
+    .posts .preview:hover {
+        border-left: 1px solid var(--color-background);
+        border-right: 1px solid var(--color-background);
+    }
+
 }

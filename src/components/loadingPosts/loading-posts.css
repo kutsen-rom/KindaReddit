@@ -94,9 +94,9 @@
     }
 }
 
-@media only screen and (max-width: 525px) {
+@media only screen and (max-width: 680px) {
     .loading-posts {
-        width: 90%;
+        width: 100%;
     }
 }
 

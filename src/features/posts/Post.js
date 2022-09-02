@@ -10,6 +10,7 @@ import { Comment } from '../comments/Comment';
 import { LoadingComments } from '../../components/loadingComments/LoadingComments';
 import { ErrorPage } from '../../components/errorPage/ErrorPage';
 import { parseNumbers } from '../../utils/utilities';
+import { BackToTop } from '../../components/backToTop/BackToTop';
 
 export const Post = () => {
 
@@ -51,6 +52,7 @@ export const Post = () => {
               return <Comment key={comment.id} comment={comment} />
             })}
           </div>
+          <BackToTop />
         </div>}
       </>
     
