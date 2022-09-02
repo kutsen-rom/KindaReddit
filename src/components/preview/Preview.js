@@ -1,7 +1,7 @@
 import './preview.css'
-import { calculateTime, parseNumbers, getAudioUrl, addLink } from '../../utils/utilities';
+import { calculateTime, parseNumbers, getAudioUrl } from '../../utils/utilities';
 import { decode } from 'html-entities'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 
 export const Preview = ({ preview }) => {
@@ -50,7 +50,6 @@ export const Preview = ({ preview }) => {
     }
 
     const handleTimeUpdate = (e) => {
-        console.log(e.target.currentTime)
         audio.currentTime = e.target.currentTime;
       }
 
@@ -59,6 +58,28 @@ export const Preview = ({ preview }) => {
         audio.pause()
     }
 })
+
+//    SWIPE FOR DEVICES
+
+const [touchStart, setTouchStart] = useState(null)
+const [touchEnd, setTouchEnd] = useState(null)
+
+const minSwipeDistance = 50 
+
+const handleTouchStart = (e) => {
+  setTouchEnd(null) 
+  setTouchStart(e.targetTouches[0].clientX)
+}
+
+const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+
+const handleTouchEnd = () => {
+  if (!touchStart || !touchEnd) return
+  const distance = touchStart - touchEnd
+  const isLeftSwipe = distance > minSwipeDistance
+  const isRightSwipe = distance < -minSwipeDistance
+  if (isLeftSwipe || isRightSwipe) isLeftSwipe ? handleLeftClick() : handleRightClick();
+}
 
     return (
     <>
@@ -101,7 +122,7 @@ export const Preview = ({ preview }) => {
 
             {/* IMAGE GALLERY */}
            {gallery.length > 0 && 
-                <figure className='gallery-container'>
+                <figure onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} className='gallery-container'>
                     {gallery.length !== 1 && 
                         <>
                             <Link onClick={(e) => {e.preventDefault()}} to=''><button onClick={handleLeftClick} className='chevron chevron-left'></button></Link>
@@ -129,7 +150,7 @@ export const Preview = ({ preview }) => {
            {/* VIDEO */}
 
            {preview.isVideo && 
-            <video onVolumeChange={() => console.log(1213)} poster={videoThumbnail} preload='none' onPlay={handlePlay} onPause={handlePause} onTimeUpdate={handleTimeUpdate} onAbort={handlePause} width='100%' controls>
+            <video poster={videoThumbnail} preload='none' onPlay={handlePlay} onPause={handlePause} onTimeUpdate={handleTimeUpdate} onAbort={handlePause} width='100%' controls>
                 <source src={preview.video.fallback_url} type="video/mp4" />
                 <audio controls>
                     <source src="https://v.redd.it/xe7n6luqhnj91/DASH_audio.mp4?source=fallback" type="audio/mpeg"/>
