@@ -97,6 +97,9 @@
 @media only screen and (max-width: 680px) {
     .loading-posts {
         width: 100%;
+        border-left: 1px solid var(--color-background);
+        border-right: 1px solid var(--color-background);
+
     }
 }
 
