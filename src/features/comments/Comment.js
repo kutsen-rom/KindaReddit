@@ -35,8 +35,15 @@ export const Comment = ({ comment }) => {
 
 
           {/* COMMENT UPVOTES AND REPLIES */}
-          
-          <p className='points'><b>{parseNumbers(comment.data.score)} {comment.data.score === 1 ? 'point' : 'points'}{comment.data.replies && ' • ' + comment.data.replies.data.children.length} {comment.data.replies && comment.data.replies.data.children.length === 1 ? 'reply' : !comment.data.replies  ? '' : 'replies'}</b></p>
+
+          <p className='points'>
+            <b>{parseNumbers(comment.data.score)} {comment.data.score === 1 ? 'point' : 'points'}
+            {comment.data.replies && ' • ' + comment.data.replies.data.children.length} 
+            {comment.data.replies && comment.data.replies.data.children.length === 1 
+            ? 'reply' 
+            : !comment.data.replies  
+            ? '' 
+            : 'replies'}</b></p>
         </div>
       </div>
   {nestedComments}

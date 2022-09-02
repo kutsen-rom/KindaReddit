@@ -21,22 +21,21 @@ export const Preview = ({ preview }) => {
 
   showMetaData();
 
-  const [imgToShow, setImgToShow] = useState(1);
+  const [currentImage, setCurrentImage] = useState(0);
 
   const handleRightClick = () => {
-    if (imgToShow === gallery.length) {
-        setImgToShow(1)
-    } else if(imgToShow < gallery.length) {
-        setImgToShow(imgToShow + 1)
+    if (currentImage + 1 === gallery.length) {
+        setCurrentImage(0)
+    } else if(currentImage < gallery.length) {
+        setCurrentImage(currentImage + 1)
     }
   }
 
   const handleLeftClick = () => {
-    
-    if (imgToShow === 1) {
-        setImgToShow(gallery.length)
-    } else if(imgToShow > 1) {
-        setImgToShow(imgToShow - 1)
+    if (currentImage === 0) {
+        setCurrentImage(gallery.length-1)
+    } else if(currentImage > 0) {
+        setCurrentImage(currentImage - 1)
     }
   }
 
@@ -61,15 +60,14 @@ export const Preview = ({ preview }) => {
 
 //    SWIPE FOR DEVICES
 
-const [touchStart, setTouchStart] = useState(null);
-const [touchEnd, setTouchEnd] = useState(null);
+const [touchStart, setTouchStart] = useState(0);
+const [touchEnd, setTouchEnd] = useState(0);
 const [isLeftSwipe, setIsLeftSwipe] = useState(false);
 
-console.log(touchEnd)
 const minSwipeDistance = 50 
 
 const handleTouchStart = (e) => {
-  setTouchEnd(null) 
+  setTouchEnd(e.targetTouches[0].clientX) 
   setTouchStart(e.targetTouches[0].clientX)
 }
 
@@ -81,8 +79,11 @@ const handleTouchEnd = () => {
   setIsLeftSwipe(distance > minSwipeDistance);
   const isRightSwipe = distance < -minSwipeDistance;
   if (isLeftSwipe || isRightSwipe) {
-    isLeftSwipe ? handleLeftClick() : handleRightClick();
+    isLeftSwipe ? handleRightClick() : handleLeftClick();
   }
+  setTouchEnd(0);
+  setTouchStart(0) 
+
 }
 
     return (
@@ -109,7 +110,18 @@ const handleTouchEnd = () => {
            {/* LINK */}
 
             <div className='link'>
-                <Link onClick={(e) => {e.preventDefault()}} to=''><a onClick={() => window.open(preview.url, '_blank')} href={preview.url}>{!preview.isRedditMediaDomain && !preview.domain.includes('self.') && !preview.domain.includes('reddit') && !preview.domain.includes('imgur')  ? preview.url : ''}</a></Link>
+                <Link onClick={(e) => {e.preventDefault()}} to=''>
+                    <a 
+                        onClick={() => window.open(preview.url, '_blank')} 
+                        href={preview.url}>
+                            {!preview.isRedditMediaDomain 
+                            && !preview.domain.includes('self.') 
+                            && !preview.domain.includes('reddit') 
+                            && !preview.domain.includes('imgur')  
+                            ? preview.url 
+                            : ''}
+                    </a>
+                    </Link>
             </div>
            
 
@@ -125,25 +137,35 @@ const handleTouchEnd = () => {
 
             {/* IMAGE GALLERY */}
            {gallery.length > 0 && 
-                <figure onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} className='gallery-container'>
-                    {gallery.length !== 1 && 
-                        <>
-                            <Link onClick={(e) => {e.preventDefault()}} to=''><button onClick={handleLeftClick} className='chevron chevron-left'></button></Link>
-                        </>}
-                    <a href={gallery[0]}>
-                        <img style={{transform: `translateX(${isLeftSwipe && (touchStart - touchEnd) / 5}%)` , position: 'relative'}}  className={imgToShow - 0 !== 1 ? 'img-hide abs' : 'abs'} width='100%' alt='' src={gallery[0]}></img>
-                    </a> 
+                <figure 
+                onTouchStart={handleTouchStart} 
+                onTouchMove={handleTouchMove} 
+                onTouchEnd={handleTouchEnd} 
+                className='gallery-container'>
                     {gallery.map((image, index) => {
-                        if (index !== 0) {
-                            return <a href={image}><img className={imgToShow - (index + 1) !== 0 ? 'img-hide abs' : 'abs'} width='100%' alt='' src={image}></img></a> 
-                            } else {
-                                return ''
-                            }
+                        return <a href={image}>
+                                    <img 
+                                        style={{transform: `translateX(${(touchEnd -touchStart) / 5}%)`, position: 'absolute'}} 
+                                        className={`${index < currentImage || currentImage === 0 && index === gallery.length - 1 
+                                            ? 'left-hide' 
+                                            : index > currentImage ||  index === 0 && currentImage === 2 
+                                            ? 'right-hide' 
+                                            : 'current'}`} 
+                                        width='100%' 
+                                        alt='' 
+                                        src={image}>
+                                    </img>
+                                </a>
                     })}
                         {gallery.length !== 1 && 
                             <>
-                                <Link onClick={(e) => {e.preventDefault()}} to=''><button onClick={handleRightClick} className='chevron chevron-right'></button></Link>
-                                <div className='img-counter'>{`${imgToShow}/${gallery.length}`}</div>
+                                <Link onClick={(e) => {e.preventDefault()}} to=''>
+                                    <button onClick={handleLeftClick} className='chevron chevron-left'></button>
+                                </Link>
+                                <Link onClick={(e) => {e.preventDefault()}} to=''>
+                                    <button onClick={handleRightClick} className='chevron chevron-right'></button>
+                                </Link>
+                                <div className='img-counter'>{`${currentImage + 1}/${gallery.length}`}</div>
                             </>}
                 </figure>
            }
@@ -153,7 +175,15 @@ const handleTouchEnd = () => {
            {/* VIDEO */}
 
            {preview.isVideo && 
-            <video poster={videoThumbnail} preload='none' onPlay={handlePlay} onPause={handlePause} onTimeUpdate={handleTimeUpdate} onAbort={handlePause} width='100%' controls>
+            <video 
+            poster={videoThumbnail} 
+            preload='none' 
+            onPlay={handlePlay} 
+            onPause={handlePause} 
+            onTimeUpdate={handleTimeUpdate} 
+            onAbort={handlePause} 
+            width='100%' 
+            controls>
                 <source src={preview.video.fallback_url} type="video/mp4" />
                 <audio controls>
                     <source src="https://v.redd.it/xe7n6luqhnj91/DASH_audio.mp4?source=fallback" type="audio/mpeg"/>
@@ -172,7 +202,8 @@ const handleTouchEnd = () => {
 
             {/* UPVOTES AND COMMENTS */}
 
-           <h6>{parseNumbers(preview.score)} {preview.score === 1 ? 'point' : 'points'} • {parseNumbers(preview.numComments)} {preview.numComments === 1 ? 'comment' : 'comments'}</h6>
+           <h6>{parseNumbers(preview.score)} {preview.score === 1 ? 'point' : 'points'} • 
+           {parseNumbers(preview.numComments)} {preview.numComments === 1 ? 'comment' : 'comments'}</h6>
        </div> }
     </>
         
