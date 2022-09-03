@@ -67,6 +67,7 @@
     .subreddit-posts a {
         font-size: 1rem;
         padding-bottom: 0.5rem;
+        border-radius: 3px;
     }
 
     .subreddit-posts b {

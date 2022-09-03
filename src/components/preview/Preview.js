@@ -53,30 +53,33 @@ export const Preview = ({ preview }) => {
       }
 
   useEffect(() => {
+    console.log(currentImage)
     return () => {
         audio.pause()
     }
-})
+}, [currentImage])
 
-//    SWIPE FOR DEVICES
+
+/*            SWIPE FOR DEVICES            */
 
 const [touchStart, setTouchStart] = useState(0);
 const [touchEnd, setTouchEnd] = useState(0);
-const [isLeftSwipe, setIsLeftSwipe] = useState(false);
 
-const minSwipeDistance = 50 
+const minSwipeDistance = 100 
 
 const handleTouchStart = (e) => {
   setTouchEnd(e.targetTouches[0].clientX) 
   setTouchStart(e.targetTouches[0].clientX)
 }
 
-const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+}
 
 const handleTouchEnd = () => {
   if (!touchStart || !touchEnd) return
   const distance = touchStart - touchEnd
-  setIsLeftSwipe(distance > minSwipeDistance);
+  const isLeftSwipe = (distance > minSwipeDistance);
   const isRightSwipe = distance < -minSwipeDistance;
   if (isLeftSwipe || isRightSwipe) {
     isLeftSwipe ? handleRightClick() : handleLeftClick();
@@ -125,7 +128,6 @@ const handleTouchEnd = () => {
             </div>
            
 
-
            {/* IMAGE */}
 
            {preview.postHint === 'image' && 
@@ -145,8 +147,8 @@ const handleTouchEnd = () => {
                     {gallery.map((image, index) => {
                         return <a href={image}>
                                     <img 
-                                        style={{transform: `translateX(${(touchEnd -touchStart) / 5}%)`, position: 'absolute'}} 
-                                        className={`${((index < currentImage && currentImage !== gallery.length - 1) || (currentImage === 0 && index === gallery.length - 1)) 
+                                        style={{transform: `translateX(${(touchEnd -touchStart) / 2}%)`}} 
+                                        className={`${((index < currentImage ) || (currentImage === 0 && index === gallery.length - 1)) 
                                             ? 'left-hide' 
                                             : (index > currentImage ||  (index === 0 && currentImage === gallery.length - 1)) 
 
@@ -203,7 +205,7 @@ const handleTouchEnd = () => {
 
             {/* UPVOTES AND COMMENTS */}
 
-           <h6>{parseNumbers(preview.score)} {preview.score === 1 ? 'point' : 'points'} • 
+           <h6>{parseNumbers(preview.score)} {preview.score === 1 ? 'point' : 'points'} •&nbsp; 
            {parseNumbers(preview.numComments)} {preview.numComments === 1 ? 'comment' : 'comments'}</h6>
        </div> }
     </>

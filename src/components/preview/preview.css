@@ -88,6 +88,8 @@
 
 .preview .gallery-container {
     height: 512px;
+    display: flex;
+    align-items: center;
 }
 
 .preview figure img {
@@ -147,12 +149,18 @@
 }
 
 .preview .left-hide {
-    top: 0;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
     left: -110%;
 }
 
 .preview .right-hide {
-    top: 0;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
     right: -110%;
 }
 
