@@ -36,6 +36,11 @@ html, body {
   overflow-x: hidden;
 }
 
+body[scroll='disable'] {
+  position: fixed;
+  width: 100vw;
+}
+
 
 body {
   margin: 3rem 0 0 0;

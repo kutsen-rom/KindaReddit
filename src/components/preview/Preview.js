@@ -23,19 +23,22 @@ export const Preview = ({ preview }) => {
 
   const [currentImage, setCurrentImage] = useState(0);
 
+  
   const handleRightClick = () => {
+  
     if (currentImage + 1 === gallery.length) {
-        setCurrentImage(0)
+        setCurrentImage(0);
     } else if(currentImage < gallery.length) {
-        setCurrentImage(currentImage + 1)
+        setCurrentImage(currentImage + 1);
     }
   }
 
   const handleLeftClick = () => {
+ 
     if (currentImage === 0) {
-        setCurrentImage(gallery.length-1)
+        setCurrentImage(gallery.length-1);
     } else if(currentImage > 0) {
-        setCurrentImage(currentImage - 1)
+        setCurrentImage(currentImage - 1);
     }
   }
 
@@ -53,32 +56,40 @@ export const Preview = ({ preview }) => {
       }
 
   useEffect(() => {
-    console.log(currentImage)
     return () => {
         audio.pause()
     }
-}, [currentImage])
+})
 
 
 /*            SWIPE FOR DEVICES            */
 
 const [touchStart, setTouchStart] = useState(0);
 const [touchEnd, setTouchEnd] = useState(0);
+const [topPosition, setTopPosition] = useState(0);
 
-const minSwipeDistance = 100 
+const minSwipeDistance = 50;
 
 const handleTouchStart = (e) => {
-  setTouchEnd(e.targetTouches[0].clientX) 
-  setTouchStart(e.targetTouches[0].clientX)
+  setTouchEnd(e.targetTouches[0].clientX);
+  setTouchStart(e.targetTouches[0].clientX);
+  setTopPosition(window.pageYOffset);
+  console.log(topPosition)
 }
 
 const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX)
+    setTouchEnd(e.targetTouches[0].clientX);
+    if (touchStart - touchEnd > 10 || touchStart - touchEnd < -10) {
+      document.body.setAttribute('scroll', 'disable');
+      document.body.style.top = `-${topPosition}px`;
+    }
 }
 
 const handleTouchEnd = () => {
+  const distance = touchStart - touchEnd;
+  document.body.setAttribute('scroll', '');
+  (distance > 50 || distance < -50) && window.scrollTo(0, topPosition);
   if (!touchStart || !touchEnd) return
-  const distance = touchStart - touchEnd
   const isLeftSwipe = (distance > minSwipeDistance);
   const isRightSwipe = distance < -minSwipeDistance;
   if (isLeftSwipe || isRightSwipe) {
@@ -86,7 +97,6 @@ const handleTouchEnd = () => {
   }
   setTouchEnd(0);
   setTouchStart(0) 
-
 }
 
     return (
@@ -103,7 +113,6 @@ const handleTouchEnd = () => {
                <p>Posted by u/{preview.author} {calculateTime(dateCurrent, dateCreated)}</p>
            </div>
            
-
 
            {/* TITLE */}
 
@@ -148,10 +157,12 @@ const handleTouchEnd = () => {
                         return <a href={image}>
                                     <img 
                                         style={{transform: `translateX(${(touchEnd -touchStart) / 2}%)`}} 
-                                        className={`${((index < currentImage ) || (currentImage === 0 && index === gallery.length - 1)) 
+                                        className={`${
+                                            index === 0 && currentImage === gallery.length - 1
+                                            ? 'right-hide'
+                                            : ((index < currentImage ) || (currentImage === 0 && index === gallery.length - 1)) 
                                             ? 'left-hide' 
-                                            : (index > currentImage ||  (index === 0 && currentImage === gallery.length - 1)) 
-
+                                            : index > currentImage
                                             ? 'right-hide' 
                                             : 'current'}`} 
                                         width='100%' 
@@ -160,6 +171,7 @@ const handleTouchEnd = () => {
                                     </img>
                                 </a>
                     })}
+                    
                         {gallery.length !== 1 && 
                             <>
                                 <Link onClick={(e) => {e.preventDefault()}} to=''>
