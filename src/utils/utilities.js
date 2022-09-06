@@ -43,6 +43,7 @@ export const calculateTime = (dateCreated, dateCurrent) => {
   export const mapPosts = (json) => {
   return json.data.children.map(post => ({
     author: post.data.author,
+    after: post.data.name,
     subredditPrefixed: post.data.subreddit_name_prefixed,
     subreddit: post.data.subreddit,
     subscribers: post.data.subreddit_subscribers,

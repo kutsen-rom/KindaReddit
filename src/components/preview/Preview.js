@@ -64,6 +64,7 @@ export const Preview = ({ preview }) => {
 
 
 /*            SWIPE FOR DEVICES            */
+
 const [touchStart, setTouchStart] = useState(0);
 const [touchEnd, setTouchEnd] = useState(0);
 const [topPosition, setTopPosition] = useState(0);

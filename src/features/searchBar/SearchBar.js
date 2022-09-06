@@ -1,10 +1,11 @@
 import { Link, Outlet, useSearchParams, useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadPosts, selectIsLoading, selectPostsError } from "../posts/postsSlice";
+import { loadPosts, loadMorePosts, selectIsLoading, selectPostsError, selectPosts } from "../posts/postsSlice";
 import './searchBar.css'
 import { LoadingPosts } from "../../components/loadingPosts/LoadingPosts";
 import { ErrorPage } from "../../components/errorPage/ErrorPage";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export const SearchBar = () => {
   const error = useSelector(selectPostsError);
@@ -19,10 +20,11 @@ export const SearchBar = () => {
   const navigate = useNavigate();
 
   const category = params.category ? params.category : '';
-  const when = params.when;
+  const when = params.when && `t=${params.when}&`;
   const subreddit = params.subreddit;
   const searchUrl = searchParams.get('search');
-  
+  const posts = useSelector(selectPosts);
+ 
   useEffect(() => {
     if (searchUrl) {
       navigate(`/popular/hot/?search=${search}`)
@@ -77,6 +79,11 @@ export const SearchBar = () => {
     }
   }
 
+  const loadMore = () => {
+
+      !isLoading && dispatch(loadMorePosts({category, when, search, subreddit, after: `&after=${posts[posts.length - 1].after}`}));
+}
+
 	return(
     <>
       <div className="search-bar">
@@ -89,7 +96,8 @@ export const SearchBar = () => {
       {isLoading ? 
         <><LoadingPosts /><LoadingPosts /></> :
         error ? <ErrorPage /> :
-        <Outlet />}
+        <InfiniteScroll dataLength={posts && posts.length-5} next={() => loadMore()} hasMore={true}><Outlet /></InfiniteScroll>
+        }
     </>
 	)
 
