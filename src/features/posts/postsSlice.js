@@ -3,14 +3,18 @@ import { mapPosts } from "../../utils/utilities";
 
 export const loadPosts = createAsyncThunk(
   'posts/loadPosts',
-  async ({category, when, search, subreddit}) => {
+  async ({sort, top, search, subreddit}) => {
        if (search) {
-          const response = await fetch(`https://www.reddit.com/search/.json?q=${search}&limit=10`);
+          const topSearch = top ? `&t=${top}` : '&t=day';
+          const subredditSearch = subreddit ? `/r/${subreddit}/` : '';
+          const sortSearch = sort ? `&sort=${sort}` : '';
+          const ending = subreddit!== 'popular' ? `&restrict_sr=1&sr_nsfw=` : '';
+          const response = await fetch(`https://www.reddit.com${subredditSearch}search/.json?q=${search}&limit=10${ending}${sortSearch}${topSearch}`);
           const json = await response.json();
           localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
           return mapPosts(json);
       }  else {
-        const response = await fetch(`https://www.reddit.com/r/${subreddit}/${category}.json?${when}&limit=10`);
+        const response = await fetch(`https://www.reddit.com/r/${subreddit}/${sort}.json?limit=10${top}`);
         const json = await response.json();
         localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
         return mapPosts(json);
@@ -20,18 +24,22 @@ export const loadPosts = createAsyncThunk(
 
 export const loadMorePosts = createAsyncThunk(
   'posts/loadMorePosts',
-  async ({category, when, search, subreddit, after}) => {
+  async ({sort, top, search, subreddit, after}) => {
     if (search) {
-      const response = await fetch(`https://www.reddit.com/search/.json?q=${search}&limit=10${after}`);
+        const topSearch = top ? `&t=${top}` : '&t=day';
+        const subredditSearch = subreddit ? `/r/${subreddit}/` : '';
+        const sortSearch = sort ? `&sort=${sort}` : '';
+        const ending = subreddit!== 'popular' ? `&restrict_sr=1&sr_nsfw=` : '';
+        const response = await fetch(`https://www.reddit.com${subredditSearch}search/.json?q=${search}&limit=10${ending}${sortSearch}${topSearch}${after}`);
+        const json = await response.json();
+        localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
+        return mapPosts(json);
+    }  else {
+      const response = await fetch(`https://www.reddit.com/r/${subreddit}/${sort}.json?limit=10${top}${after}`);
       const json = await response.json();
       localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
       return mapPosts(json);
-  } else {
-    const response = await fetch(`https://www.reddit.com/r/${subreddit}/${category}.json?${when}&limit=10${after}`);
-    const json = await response.json();
-    localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
-    return mapPosts(json);
-  }
+    }
   }
 )
 
@@ -41,11 +49,15 @@ export const postsSlice = createSlice({
         posts: JSON.parse(localStorage.getItem('posts')),
         isLoading: false,
         postsError: false,
-        isInfiniteScroll: false
+        isInfiniteScroll: false,
+        noResults: false
     },
     reducers: {
-      addPost: (state, action) => {
-        state.post = action.payload;
+      setNoResultsError: (state) => {
+        state.noResults = false;
+      },
+      setNoError: (state) => {
+        state.postsError = false;
       }
     },
     extraReducers: (builder) => {
@@ -56,9 +68,16 @@ export const postsSlice = createSlice({
                 state.isInfiniteScroll = false;
             })
             .addCase(loadPosts.fulfilled, (state, action) => {
+              if (!action.payload.length) {
+                state.noResults = true;
+                state.postsError = true;
+                state.isLoading = false;
+                // state.posts = state.posts;
+              } else {
                 state.isLoading = false;
                 state.postsError = false;
                 state.posts = action.payload;
+              }
             })
             .addCase(loadPosts.rejected, (state) => {
                 state.isLoading = false;
@@ -78,6 +97,8 @@ export const selectPosts = state => state.posts.posts;
 export const selectIsLoading = state => state.posts.isLoading;
 export const selectPostsError = state => state.posts.postsError;
 export const selectIsInfiniteScroll = state => state.posts.isInfiniteScroll;
-export const { addPost } = postsSlice.actions;
+export const selectNoResults = state => state.posts.noResults;
+
+export const { setNoResultsError, setNoError } = postsSlice.actions;
 
 export default postsSlice.reducer;

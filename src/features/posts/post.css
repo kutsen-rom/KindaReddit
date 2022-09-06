@@ -34,7 +34,7 @@
     color: white;
     text-align: center;
     border: 1px solid var(--color-post-border);
-    border-radius: 3px;
+    border-radius: 30px;
     text-decoration: none;
     font-size: 1.2rem;
     display: flex;
@@ -64,6 +64,7 @@
         font-size: 1rem;
         padding-bottom: 0.5rem;
         flex-direction: column;
+        border-radius: 3px;
     }
 
     .subreddit {

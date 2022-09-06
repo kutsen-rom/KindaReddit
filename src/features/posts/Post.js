@@ -2,7 +2,7 @@ import './post.css'
 
 import { selectPosts } from "./postsSlice"
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useOutletContext } from 'react-router-dom'
 import { loadComments, selectComments, selectCommentsAreLoading, selectCommentsError} from '../comments/commentsSlice';
 import { useEffect } from 'react';
 import { Preview } from '../../components/preview/Preview';
@@ -31,14 +31,21 @@ export const Post = () => {
       }
       // eslint-disable-next-line
     }, [])
+// eslint-disable-next-line
+    const [search, setSearch] = useOutletContext();
 
+    useEffect(() => {
+      return () => {
+        setSearch(localStorage.getItem('search'));
+      }
+    })
 
     return ( 
       <>
       {!post ? <ErrorPage /> : 
         <div className="post-container">
                <div className='subreddit'>
-            <Link to={`/${post.subreddit}/hot`} ><b>{post.subredditPrefixed}</b><div className='separate'>&nbsp;•&nbsp;</div><div><b>{parseNumbers(post.subscribers)} subscribers</b></div></Link>
+            <Link onClick={() => setSearch('')} to={`/${post.subreddit}/hot`} ><b>{post.subredditPrefixed}</b><div className='separate'>&nbsp;•&nbsp;</div><div><b>{parseNumbers(post.subscribers)} subscribers</b></div></Link>
           </div>
           <div className='post'> 
             <Preview preview={post}/>

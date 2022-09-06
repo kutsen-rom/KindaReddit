@@ -40,6 +40,10 @@
     background-color: rgb(190, 52, 2);
 }
 
+.no-results {
+    text-align: center;   
+}
+
 @media only screen and (max-width: 420px) {
     .error-container h1 {
         font-size: 1.5rem;

@@ -15,9 +15,12 @@ export const Preview = ({ preview }) => {
 
   const showMetaData = () => {
     let index = 0;
-    for (let key in preview.mediaMetadata) {
-        gallery.push(decode(preview.mediaMetadata[preview.gallery_data[index]].s.u));
-        index++
+    if (preview.gallery_data) {
+        //eslint-disable-next-line
+        for (let key in preview.mediaMetadata) {
+            gallery.push(decode(preview.mediaMetadata[preview.gallery_data[index]].s.u));
+            index++
+        }
     }
   }
 
@@ -168,7 +171,6 @@ const handleAnimation = (index) => {
                             {!preview.isRedditMediaDomain 
                             && !preview.domain.includes('self.') 
                             && !preview.domain.includes('reddit') 
-                            && !preview.domain.includes('imgur')  
                             ? preview.url 
                             : ''}
                     </a>
