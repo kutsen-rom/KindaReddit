@@ -14,8 +14,10 @@ export const Preview = ({ preview }) => {
   let gallery = [];
 
   const showMetaData = () => {
+    let index = 0;
     for (let key in preview.mediaMetadata) {
-        gallery.push(decode(preview.mediaMetadata[key].s.u))
+        gallery.push(decode(preview.mediaMetadata[preview.gallery_data[index]].s.u));
+        index++
     }
   }
 
@@ -205,7 +207,7 @@ const handleAnimation = (index) => {
                                             ? 'right-hide' 
                                             : 'current'}`} 
                                             id={`${preview.id}-img-${index}`}
-                                        width='100%' 
+                                        max-width='100%' 
                                         alt='' 
                                         src={image}>
                                     </img>
