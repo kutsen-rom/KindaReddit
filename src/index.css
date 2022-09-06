@@ -13,7 +13,6 @@
   --color-orange-button-hover:rgb(242, 64, 0);
   --color-orange-button-active:rgb(197, 53, 1);
   --color-post-border-hover: rgb(118, 118, 118);
-  --color-counter: rgb(3, 3, 3);
 }
 
 html[data-theme='light'] {
@@ -29,7 +28,6 @@ html[data-theme='light'] {
   --color-action-button-hover: rgb(221, 222, 223);
   --color-action-button-active: rgb(197, 198, 199);
   --color-post-border-hover: rgb(155, 155, 155);
-  --color-counter: rgb(154, 154, 154);
 }
 
 html, body {

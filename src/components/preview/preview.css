@@ -5,7 +5,6 @@
     border-radius: 3px;
     border: 1px solid var(--color-post-border);
     padding: 0% 5%;
-    overflow: hidden;
 }
 
 .preview h3 {
@@ -90,6 +89,7 @@
     height: 512px;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 .preview figure img {
@@ -103,7 +103,7 @@
 }
 
 .preview .img-hide {
-   display: none;
+   display: block;
 }
 
 .preview .chevron {
@@ -138,7 +138,7 @@
 }
 
 .preview .img-counter {
-    background-color: var(--color-counter);
+    background-color: rgba(3, 3, 3, 0.5);
     color: white;
     width: 3rem;
     text-align: center;
@@ -165,8 +165,11 @@
 }
 
 .preview .current {
-    top: 0;
-    left: 0;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 0%;
 }
 
 @media only screen and (max-width: 1180px) {
@@ -186,6 +189,34 @@
      .preview h6 {
         font-size: .8rem;
      }
+
+     .preview .img-counter {
+        display: none;;
+     }
+
+     .preview .dots {
+        position: absolute;
+        bottom: 0.25rem;
+        width: auto;
+        border-radius: 30px;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+    }
+    
+     .preview .dot {
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        border: 1px solid white;
+        z-index: 10;
+        margin: 0.25rem;
+    }
+    
+    .preview .dot-selected {
+        background-color: white;
+    }
+    
 }
 
 @media only screen and (max-width: 680px) {
@@ -193,7 +224,6 @@
 
     .preview .gallery-container {
         height: 200px;
-        overflow: hidden;
     }
 
     .preview h3 {
@@ -240,5 +270,50 @@
     
     .preview .chevron-right {
         display: none;
+    }
+}
+
+@keyframes leftSwipeCurrent {
+    0% {
+        transform: translateX(-100%);
+    }
+
+     100% {
+        transform: translateX(0%);
+
+    }
+}
+
+@keyframes leftSwipeNext {
+    0% {
+        transform: translateX(-100%);
+    }
+
+     100% {
+        transform: translateX(0);
+
+    }
+}
+
+@keyframes rightSwipeCurrent {
+    0% {
+        transform: translateX(100%);
+
+    }
+
+     100% {
+        transform: translateX(0%);
+
+    }
+}
+
+@keyframes rightSwipeNext {
+    0% {
+        transform: translateX(100%);
+
+    }
+
+     100% {
+        transform: translateX(0%);
     }
 }

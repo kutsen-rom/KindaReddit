@@ -22,10 +22,11 @@ export const Preview = ({ preview }) => {
   showMetaData();
 
   const [currentImage, setCurrentImage] = useState(0);
+  const [click, setClick] = useState('');
 
   
   const handleRightClick = () => {
-  
+    setClick('right');
     if (currentImage + 1 === gallery.length) {
         setCurrentImage(0);
     } else if(currentImage < gallery.length) {
@@ -34,7 +35,7 @@ export const Preview = ({ preview }) => {
   }
 
   const handleLeftClick = () => {
- 
+    setClick('left');
     if (currentImage === 0) {
         setCurrentImage(gallery.length-1);
     } else if(currentImage > 0) {
@@ -63,7 +64,6 @@ export const Preview = ({ preview }) => {
 
 
 /*            SWIPE FOR DEVICES            */
-
 const [touchStart, setTouchStart] = useState(0);
 const [touchEnd, setTouchEnd] = useState(0);
 const [topPosition, setTopPosition] = useState(0);
@@ -74,9 +74,7 @@ const handleTouchStart = (e) => {
   setTouchEnd(e.targetTouches[0].clientX);
   setTouchStart(e.targetTouches[0].clientX);
   setTopPosition(window.pageYOffset);
-  console.log(topPosition)
 }
-
 const handleTouchMove = (e) => {
     setTouchEnd(e.targetTouches[0].clientX);
     if (touchStart - touchEnd > 10 || touchStart - touchEnd < -10) {
@@ -85,19 +83,57 @@ const handleTouchMove = (e) => {
     }
 }
 
+const [percent, setPercent] = useState(0);
+const [isLeft, setIsLeft] = useState('init');
 const handleTouchEnd = () => {
+    //           PREVENT VERTICAL SCROLL ON SWIPE
   const distance = touchStart - touchEnd;
   document.body.setAttribute('scroll', '');
-  (distance > 50 || distance < -50) && window.scrollTo(0, topPosition);
+  (distance > 10 || distance < -10) && window.scrollTo(0, topPosition);
+
+  const width = document.getElementById(`${preview.id}-img-${currentImage}`).getBoundingClientRect().width;
+  const position = document.getElementById(`${preview.id}-img-${currentImage}`).getBoundingClientRect().right;
+  setPercent((position / width) / 30);
+
   if (!touchStart || !touchEnd) return
   const isLeftSwipe = (distance > minSwipeDistance);
+  
   const isRightSwipe = distance < -minSwipeDistance;
   if (isLeftSwipe || isRightSwipe) {
-    isLeftSwipe ? handleRightClick() : handleLeftClick();
+    if (isLeftSwipe) {
+        setIsLeft(false);
+        handleRightClick();
+    } else {
+        setIsLeft(true);
+        handleLeftClick();
+    } 
   }
   setTouchEnd(0);
   setTouchStart(0) 
 }
+
+
+const handleAnimation = (index) => {
+    if (click === 'right' || !isLeft) {
+        return `rightSwipe${
+            index === currentImage 
+            ? 'Next' 
+            : index === currentImage - 1 || index === gallery.length - 1 
+            ? 'Current' 
+            : ''
+        } .5s -${percent * 1}s`
+    } else if (click === 'left' || isLeft) {
+            return `leftSwipe${
+                index === currentImage 
+                ? 'Next' 
+                : index === currentImage + 1 || (index === 0 && currentImage === gallery.length - 1)
+                ? 'Current'
+                : ''
+            } .5s -${percent * 1}s`
+        }
+    }
+    
+  
 
     return (
     <>
@@ -156,20 +192,24 @@ const handleTouchEnd = () => {
                     {gallery.map((image, index) => {
                         return <a href={image}>
                                     <img 
-                                        style={{transform: `translateX(${(touchEnd -touchStart) / 2}%)`}} 
-                                        className={`${
-                                            index === 0 && currentImage === gallery.length - 1
+                                        style={{
+                                            transform: `translateX(${(touchEnd - touchStart) / 2}%)`, 
+                                            animation: `${handleAnimation(index)}`}} 
+                                        className={`
+                                            ${index === 0 && currentImage === gallery.length - 1
                                             ? 'right-hide'
                                             : ((index < currentImage ) || (currentImage === 0 && index === gallery.length - 1)) 
                                             ? 'left-hide' 
                                             : index > currentImage
                                             ? 'right-hide' 
                                             : 'current'}`} 
+                                            id={`${preview.id}-img-${index}`}
                                         width='100%' 
                                         alt='' 
                                         src={image}>
                                     </img>
                                 </a>
+                                
                     })}
                     
                         {gallery.length !== 1 && 
@@ -181,6 +221,11 @@ const handleTouchEnd = () => {
                                     <button onClick={handleRightClick} className='chevron chevron-right'></button>
                                 </Link>
                                 <div className='img-counter'>{`${currentImage + 1}/${gallery.length}`}</div>
+                                <div className='dots'>
+                                    {gallery.map((image, index) => {
+                                    return <div className={`dot ${currentImage === index && 'dot-selected'}`}></div>
+})}
+                                </div>
                             </>}
                 </figure>
            }
