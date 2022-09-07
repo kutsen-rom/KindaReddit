@@ -5,6 +5,7 @@ import { useParams, NavLink, useOutletContext, useSearchParams } from 'react-rou
 export const Sort = () => {
     const searchInput = useOutletContext();
     const search = searchInput[0] ? `?search=${searchInput[0]}` : '';
+    //eslint-disable-next-line
     const [searchParams, setSearchParams] = useSearchParams();
     const searchUrl = searchParams.get('search');
   console.log(search)

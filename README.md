@@ -1,46 +1,79 @@
-# Getting Started with Create React App and Redux
+<a target="_blank" href="https://kindareddit.netlify.app"><img target="_blank" alt='KindaReddit' src='./public/images/kindareddit-logo-theme-light.svg'></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# KindaReddit
 
-## Available Scripts
 
-In the project directory, you can run:
+[KindaReddit](https://kindareddit.netlify.app) is a React-Redux application that allows user to perform basic actions (view, search, sort) posts and comments on Reddit based on undocumented reddit.json API.
 
-### `npm start`
+## General Information
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This project was created for portfolio reasons only and doesn't solve any problem that native Reddit app can't handle.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
+<div align='center''>
+    <img title="HTML5" alt='HTML5' align='top' src="https://github.com/devicons/devicon/blob/v2.15.1/icons/html5/html5-original.svg" style="width: 10%;">&emsp;&emsp;&emsp;
+    <img title="CSS3" alt='CSS3' align='top' src="https://github.com/devicons/devicon/blob/v2.15.1/icons/css3/css3-original.svg" style="width: 10%;">&emsp;&emsp;&emsp;
+    <img title="JavaScript" alt='JavaScript' align='top' src="https://github.com/devicons/devicon/blob/v2.15.1/icons/javascript/javascript-original.svg" style="width: 10%;">&emsp;&emsp;&emsp;
+    <img title="React" alt='React' align='top' src="https://github.com/devicons/devicon/blob/v2.15.1/icons/react/react-original.svg" style="width: 10%;">&emsp;&emsp;&emsp;
+    <img title="Redux" alt='Redux' align='top' src="https://github.com/devicons/devicon/blob/v2.15.1/icons/redux/redux-original.svg" style="width: 10%;">
+</div>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## :star: Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* :writing_hand: No sign in required
+* :ok_hand: Simple UI
+* :last_quarter_moon: Dark/light theme
+* :closed_book: Includes pages for: 
+    * :page_facing_up: subreddit posts
+    * :page_facing_up: all reddit posts
+    * :page_facing_up: search results
+    * :page_facing_up: post with comments section
+* :recycle: Sort feature
+* :mag: Search feature
+* :top: Back to Top button
+* :infinity::scroll: Infinite scroll
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Screenshots
 
-### `npm run eject`
+<img title="Starter page" alt='Starter page' align='top' src="./public/images/screenshots/screen-starter.png?raw=true">
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<img title="Subreddit page" alt='Subreddit page' align='top' src="./public/images/screenshots/screen-subreddit.png?raw=true">
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<img title="Search results page" alt='Search results page' align='top' src="./public/images/screenshots/screen-search-results.png?raw=true">
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<img title="Post page with comments section" alt='Post page with comments section' align='top' src="./public/images/screenshots/screen-comments.png?raw=true">
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<img title="Post page with comments section, dark mode" alt='Post page with comments section, dark mode' align='top' src="./public/images/screenshots/screen-comments-dark.png?raw=true">
 
-## Learn More
+## Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can use this app for viewing posts: on Reddit, on subreddit, by search results, sort them by different categories and view comments to each particular post.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Status 
+
+:heavy_check_mark: Completed
+
+## Improvements
+
+- [ ] Add support for both video and audio playing simultaneously on iOS :iphone:
+
+## Features that can be added
+
+- [ ] View all posts of selected user
+- [ ] Add ability to search subreddits by name
+
+<p align="center">
+   <h2>Contact</h2>  
+</p> 
+
+<p align="center">
+    <a href="https://github.com/navsi100rom"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="width: 10%;"></a>  
+</p> 
+
+- - - -
+
+<h6 align='center'>Made in <img src="https://github.com/lipis/flag-icons/blob/main/flags/4x3/ua.svg" style="width: 2%;"> with :heart:</h6>  
+

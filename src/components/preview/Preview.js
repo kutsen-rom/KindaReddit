@@ -34,8 +34,15 @@ export const Preview = ({ preview }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [click, setClick] = useState('');
 
+  const scrollBack = () => {
+    const y = window.pageYOffset;
+    setTimeout(() => {
+      window.scrollTo(0, y);
+    }, 1)
+  }
   
   const handleRightClick = () => {
+    scrollBack();
     setClick('right');
     if (currentImage + 1 === preview.gallery_data.length) {
         setCurrentImage(0);
@@ -45,6 +52,7 @@ export const Preview = ({ preview }) => {
   }
 
   const handleLeftClick = () => {
+    scrollBack();
     setClick('left');
     if (currentImage === 0) {
         setCurrentImage(preview.gallery_data.length-1);
@@ -192,7 +200,9 @@ const handleAnimation = (index) => {
             </figure>
        }
 
+
             {/* IMAGE GALLERY */}
+            
            {gallery.length > 0 && 
                 <figure 
                 onTouchStart={handleTouchStart} 

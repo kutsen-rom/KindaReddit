@@ -90,12 +90,21 @@ export const SearchBar = ({routeError}) => {
       !isLoading && dispatch(loadMorePosts({sort, top, search, subreddit, after: `&after=${posts[posts.length - 1].after}`}));
 }
 
+const handleFocus = () => {
+  const y = window.pageYOffset;
+    setTimeout(() => {
+      window.scrollTo(0, y);
+    }, 1)
+    setSearch('');
+     localStorage.setItem('search', '')
+}
+
 	return(
     <>
       <div className="search-bar">
         <Link to='/'><div onClick={() => {setSearch(''); dispatch(setNoResultsError()); dispatch(setNoError())}} className='logo' id='logo'></div></Link>
         <form onSubmit={handleSubmit}>
-          <input onFocus={() => {setSearch(''); localStorage.setItem('search', '')}} name="term" value={search} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
+          <input onFocus={handleFocus} name="term" value={search} onChange={handleChange} placeholder="Search Reddit" type='text'></input>
         </form>
         <button onClick={handleClick}>Change theme</button>
       </div>
