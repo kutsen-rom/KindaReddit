@@ -28,7 +28,9 @@ export const SearchBar = ({routeError}) => {
   useEffect(() => {
     if (search) {
       const searchTop = top ? `/${params.top}` : '';
-      navigate(`/${subreddit}/${sort}${searchTop}/?search=${search}`)
+      !subreddit 
+      ? navigate(`/popular/hot/?search=${search}`)
+      : navigate(`/${subreddit}/${sort}${searchTop}/?search=${search}`);
       dispatch(loadPosts({sort, top, search, subreddit}))
     } else if (!params.postId && !subreddit && sort && !searchUrl) {
       dispatch(loadPosts({sort, top}));
@@ -84,7 +86,7 @@ export const SearchBar = ({routeError}) => {
   }
 
   const loadMore = () => {
-
+      console.log(search)
       !isLoading && dispatch(loadMorePosts({sort, top, search, subreddit, after: `&after=${posts[posts.length - 1].after}`}));
 }
 

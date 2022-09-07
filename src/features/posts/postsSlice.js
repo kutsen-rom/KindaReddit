@@ -5,11 +5,11 @@ export const loadPosts = createAsyncThunk(
   'posts/loadPosts',
   async ({sort, top, search, subreddit}) => {
        if (search) {
-          const topSearch = top ? `&t=${top}` : '&t=day';
-          const subredditSearch = subreddit ? `/r/${subreddit}/` : '';
+          const topSearch = (top && sort === 'top') ? `&t=${top}` : sort !== 'top' ? '' :'&t=day';
+          const subredditSearch = subreddit !== 'popular' ? `r/${subreddit}/` : '';
           const sortSearch = sort ? `&sort=${sort}` : '';
           const ending = subreddit!== 'popular' ? `&restrict_sr=1&sr_nsfw=` : '';
-          const response = await fetch(`https://www.reddit.com${subredditSearch}search/.json?q=${search}&limit=10${ending}${sortSearch}${topSearch}`);
+          const response = await fetch(`https://www.reddit.com/${subredditSearch}search/.json?q=${search}&limit=10${ending}${sortSearch}${topSearch}`);
           const json = await response.json();
           localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
           return mapPosts(json);
@@ -26,20 +26,20 @@ export const loadMorePosts = createAsyncThunk(
   'posts/loadMorePosts',
   async ({sort, top, search, subreddit, after}) => {
     if (search) {
-        const topSearch = top ? `&t=${top}` : '&t=day';
-        const subredditSearch = subreddit ? `/r/${subreddit}/` : '';
-        const sortSearch = sort ? `&sort=${sort}` : '';
-        const ending = subreddit!== 'popular' ? `&restrict_sr=1&sr_nsfw=` : '';
-        const response = await fetch(`https://www.reddit.com${subredditSearch}search/.json?q=${search}&limit=10${ending}${sortSearch}${topSearch}${after}`);
-        const json = await response.json();
-        localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
-        return mapPosts(json);
-    }  else {
-      const response = await fetch(`https://www.reddit.com/r/${subreddit}/${sort}.json?limit=10${top}${after}`);
+      const topSearch = (top && sort === 'top') ? `&t=${top}` : sort !== 'top' ? '' :'&t=day';
+      const subredditSearch = subreddit !== 'popular' ? `r/${subreddit}/` : '';
+      const sortSearch = sort ? `&sort=${sort}` : '';
+      const ending = subreddit!== 'popular' ? `&restrict_sr=1&sr_nsfw=` : '';
+      const response = await fetch(`https://www.reddit.com/${subredditSearch}search/.json?q=${search}&limit=10${ending}${sortSearch}${topSearch}${after}`);
       const json = await response.json();
       localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
       return mapPosts(json);
-    }
+  }  else {
+    const response = await fetch(`https://www.reddit.com/r/${subreddit}/${sort}.json?limit=10${top}${after}`);
+    const json = await response.json();
+    localStorage.setItem('posts', JSON.stringify(mapPosts(json)));
+    return mapPosts(json);
+  }
   }
 )
 

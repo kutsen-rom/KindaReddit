@@ -1,22 +1,26 @@
 import './sort.css'
 
-import { useParams, NavLink, useOutletContext } from 'react-router-dom'
+import { useParams, NavLink, useOutletContext, useSearchParams } from 'react-router-dom'
 
 export const Sort = () => {
     const searchInput = useOutletContext();
-    const search = searchInput ? `?search=${searchInput}` : '';
+    const search = searchInput[0] ? `?search=${searchInput[0]}` : '';
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchUrl = searchParams.get('search');
+  console.log(search)
     const params = useParams();
     const sort = params.sort ? params.sort : '';
     const top = params.top;
     const subreddit = params.subreddit;
-    
     return (
       <>
         <div className="sort first-box">
+          {searchUrl && <NavLink to={`/${subreddit}/relevance${search}`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>Relevance</b></NavLink>}
           <NavLink to={`/${subreddit}/hot${search}`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>Hot</b></NavLink>
           <NavLink to={`/${subreddit}/new${search}`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>New</b></NavLink>
           <NavLink to={`/${subreddit}/top${search}`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>Top</b></NavLink>
-          <NavLink to={`/${subreddit}/rising${search}`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>Rising</b></NavLink>
+          {(subreddit === 'popular' || (subreddit !== 'popular' && !searchUrl)) && <NavLink to={`/${subreddit}/rising${search}`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>Rising</b></NavLink>}
+          {(subreddit !== 'popular' && searchUrl) && <NavLink to={`/${subreddit}/comments${search}`} className={({isActive}) => (isActive ? 'active' : 'none')}><b>Most Comments</b></NavLink>}
         </div>
         { sort === 'top' &&
         <div className='sort second-box'>

@@ -97,7 +97,11 @@ export const parseNumbers = (number) => {
 }
 
 export const getAudioUrl = (videoFallbackUrl) => {
-  const indexDash =  videoFallbackUrl.indexOf('_');
-  const indexDot = videoFallbackUrl.indexOf('mp4');
-  return videoFallbackUrl.slice(0, indexDash+1) + 'audio.' + videoFallbackUrl.slice(indexDot)
+  if (videoFallbackUrl) {
+    const indexDash =  videoFallbackUrl.indexOf('_');
+    const indexDot = videoFallbackUrl.indexOf('mp4');
+    return videoFallbackUrl.slice(0, indexDash+1) + 'audio.' + videoFallbackUrl.slice(indexDot)
+  } else {
+    return
+  }
 }

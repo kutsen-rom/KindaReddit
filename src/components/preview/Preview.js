@@ -14,13 +14,18 @@ export const Preview = ({ preview }) => {
   let gallery = [];
 
   const showMetaData = () => {
-    let index = 0;
     if (preview.gallery_data) {
-        //eslint-disable-next-line
-        for (let key in preview.mediaMetadata) {
-            gallery.push(decode(preview.mediaMetadata[preview.gallery_data[index]].s.u));
-            index++
+    let count = 1;
+        if (preview.gallery_data.length === 2) {
+            count = 2;
         }
+        //eslint-disable-next-line
+        for (let j = 0; j < count; j++) {
+            for (let i = 0; i < preview.gallery_data.length; i++) {
+                gallery.push(decode(preview.mediaMetadata[preview.gallery_data[i]].s.u));
+            }
+        }
+        
     }
   }
 
@@ -32,9 +37,9 @@ export const Preview = ({ preview }) => {
   
   const handleRightClick = () => {
     setClick('right');
-    if (currentImage + 1 === gallery.length) {
+    if (currentImage + 1 === preview.gallery_data.length) {
         setCurrentImage(0);
-    } else if(currentImage < gallery.length) {
+    } else if(currentImage < preview.gallery_data.length) {
         setCurrentImage(currentImage + 1);
     }
   }
@@ -42,7 +47,7 @@ export const Preview = ({ preview }) => {
   const handleLeftClick = () => {
     setClick('left');
     if (currentImage === 0) {
-        setCurrentImage(gallery.length-1);
+        setCurrentImage(preview.gallery_data.length-1);
     } else if(currentImage > 0) {
         setCurrentImage(currentImage - 1);
     }
@@ -203,14 +208,17 @@ const handleAnimation = (index) => {
                                         className={`
                                             ${index === 0 && currentImage === gallery.length - 1
                                             ? 'right-hide'
-                                            : ((index < currentImage ) || (currentImage === 0 && index === gallery.length - 1)) 
+                                            : ((index === currentImage - 1 ) || (currentImage === 0 && index === gallery.length - 1)) 
                                             ? 'left-hide' 
-                                            : index > currentImage
+                                            : index === currentImage + 1
                                             ? 'right-hide' 
-                                            : 'current'}`} 
+                                            : index === currentImage 
+                                            ? 'current'
+                                            : 'img-hide'}`} 
                                             id={`${preview.id}-img-${index}`}
                                         max-width='100%' 
-                                        alt='' 
+                                        alt=''
+                                        max-height='100%'
                                         src={image}>
                                     </img>
                                 </a>
@@ -225,9 +233,9 @@ const handleAnimation = (index) => {
                                 <Link onClick={(e) => {e.preventDefault()}} to=''>
                                     <button onClick={handleRightClick} className='chevron chevron-right'></button>
                                 </Link>
-                                <div className='img-counter'>{`${currentImage + 1}/${gallery.length}`}</div>
+                                <div className='img-counter'>{`${currentImage + 1}/${preview.gallery_data.length}`}</div>
                                 <div className='dots'>
-                                    {gallery.map((image, index) => {
+                                    {preview.gallery_data.map((image, index) => {
                                     return <div className={`dot ${currentImage === index && 'dot-selected'}`}></div>
 })}
                                 </div>
