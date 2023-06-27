@@ -70,7 +70,7 @@ You can use this app for viewing posts: on Reddit, on subreddit, by search resul
 </p> 
 
 <p align="center">
-    <a href="https://github.com/navsi100rom"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="width: 10%;"></a>  
+    <a href="https://github.com/kutsen-rom"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="width: 10%;"></a>  
 </p> 
 
 - - - -
